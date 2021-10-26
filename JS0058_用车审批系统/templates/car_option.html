@@ -1,0 +1,137 @@
+{% extends "base_site.html" %}
+
+{% block title %} 车辆管理 {% endblock title %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>{% if car %}
+                        编辑车辆
+                    {% else %}
+                        添加车辆
+                    {% endif %} </h3>
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            <form class="form-horizontal form-label-left" method="post">
+                                {% csrf_token %}
+                                {% if msg %}
+                                    <div class="alert alert-warning">
+
+                                        <a href="#" class="close" data-dismiss="alert">
+                                            &times;
+                                        </a>
+                                        <strong>警告！</strong>{{ msg }}
+                                    </div>
+
+                                {% endif %}
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">车辆编号 <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="name" class="form-control col-md-7 col-xs-12" name="no"
+                                               required="required" type="text"
+                                               value="{% if car %}{{ car.no }}{% endif %}">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">车型 <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="name" class="form-control col-md-7 col-xs-12" name="type"
+                                               required="required" type="text"
+                                               value="{% if car %}{{ car.type }}{% endif %}">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"> 座位数 <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="name" class="form-control col-md-7 col-xs-12" name="nums"
+                                               required="required" type="text"
+                                               value="{% if car %}{{ car.nums }}{% endif %}">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">当前公里数 <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="name" class="form-control col-md-7 col-xs-12" name="knmus"
+                                               required="required" type="text"
+                                               value="{% if car %}{{ car.knmus }}{% endif %}">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">当前停放地址 <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="name" class="form-control col-md-7 col-xs-12" name="address"
+                                               required="required" type="text"
+                                               value="{% if car %}{{ car.address }}{% endif %}">
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"> 车辆状态<span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select id="name" class="form-control col-md-7 col-xs-12" name="status"
+                                                required="required" type="text"
+                                                value="{% if car %}{{ car.status }}{% endif %}">
+                                            <option value="空闲" {% ifequal car.status "空闲" %}selected
+                                            {% endifequal %}>空闲
+                                            </option>
+                                            <option value="在用" {% ifequal car.status "在用" %}selected
+                                            {% endifequal %}>在用
+                                            </option>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <a type="submit" class="btn btn-primary" href="/dept/list">返回</a>
+                                        <button id="send" type="submit" class="btn btn-success">
+                                            {% if car %}
+                                                编辑
+                                            {% else %}
+                                                添加
+                                            {% endif %}
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ block.super }}
+    <!-- validator -->
+    <script src="/static/vendors/validator/validator.js"></script>
+{% endblock javascripts %}

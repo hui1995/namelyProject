@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="jumbotron" style="margin-top: 20px">
+        <h4>{{ user.username }}的留言板</h4>
+    </div>
+    {% if request.user.is_authenticated %}
+        <div class="row" style="margin-top: 10px">
+            <h3>提交留言</h3>
+            <div class="sol-sm-12">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                  name="message"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn-primary btn" type="submit">留言</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    {% endif %}
+
+{% endblock %}

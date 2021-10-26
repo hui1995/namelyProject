@@ -1,0 +1,65 @@
+{% extends "base_site.html" %}
+
+{% block title %} Tables {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main" style="min-height: 800px">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h3>脸谱管理</h3>
+        </div>
+
+
+
+      <div class="row">
+
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_content">
+            <a class="btn btn-primary" href="/face/opt/">添加</a>
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>分类名称</th>
+                    <th>脸谱</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for foo in result %}
+                      <tr>
+                      <td></td>
+                    <th scope="row">{{ foo.category }}</th>
+                    <td><img src="{{ foo.face_url }}" alt="" style="width: 80px;height: 50px"></td>
+                    <td>
+                <a class="btn btn-primary" href="/face/del/?id={{ foo.id }}">删除</a></td>
+                  </tr>
+
+                {% endfor %}
+
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super() }}
+{% endblock javascripts %}
+
+
+

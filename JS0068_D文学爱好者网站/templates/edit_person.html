@@ -1,0 +1,43 @@
+{% extends 'person_base.html' %}
+{% block person%}
+    <div class="row" style="margin-top: 100px">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <div class="card text-center">
+                <div class="card-header">
+                    修改个人资料
+                </div>
+                <form class="card-body" action="" method="post">
+                {% csrf_token %}
+                               {% if msg %}
+                        <div class="alert alert-primary" role="alert">
+                            {{ msg }}
+                        </div>
+                    {% endif %}
+
+
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-sm-4 col-form-label">邮箱</label>
+                        <div class="col-sm-8">
+                            <input type="email" class="form-control" id="inputPassword" name="email" value="{{ request.user.email }}">
+                        </div>
+                    </div>
+                             <div class="mb-3 row">
+                        <label for="inputPassword" class="col-sm-4 col-form-label">用户名</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="inputPassword" name="username" value="{{ request.user.username }}">
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <button type="submit" class="btn btn-primary mb-3">修改</button>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,125 @@
+{% extends "base_site.html" %}
+
+{% block title %} Dashboard 1 {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <!-- top tiles -->
+
+
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="dashboard_graph">
+
+          <div class="row x_title">
+            <div class="col-md-6">
+              <h3>房型数量</h3>
+            </div>
+
+          </div>
+          <div class="row">
+          <div class="col-sm-3"></div>
+<div class="col-sm-6"  id="container" style="height: 300px"></div>
+          <div class="col-sm-3"></div>
+</div>
+          <div class="row">
+
+          <div class="col-sm-3"></div>
+
+<div class="col-sm-6"  id="container2" style="height: 300px"></div>
+
+
+</div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+
+
+        <script type="text/javascript">
+var dom = document.getElementById("container");
+var dom2 = document.getElementById("container2");
+var myChart = echarts.init(dom);
+var myChart2 = echarts.init(dom2);
+var app = {};
+
+var option;
+
+
+
+option = {
+    xAxis: {
+        type: 'category',
+        data: ['东城', '西城', '海淀', '朝阳', '丰台', '石景山']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        data: [{{ dongchegncount }}, {{ xichengcount }}, {{ haidiancount }}, {{ chaoyangcount }}, {{ fengtaicount }}, {{ shijingshancount }}],
+        type: 'bar'
+    }]
+};
+
+
+if (option && typeof option === 'object') {
+    myChart.setOption(option);
+}
+
+
+option = {
+    title: {
+        text: '房源数量',
+        left: 'center'
+    },
+    tooltip: {
+        trigger: 'item'
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+    },
+    series: [
+        {
+            name: '数量',
+            type: 'pie',
+            radius: '50%',
+            data: [
+
+                {value: {{ dongchegncount }}, name: '东城'},
+                {value: {{ xichengcount }}, name: '西城'},
+                {value: {{ haidiancount }}, name: '海淀'},
+                {value: {{ chaoyangcount }}, name: '朝阳'},
+                {value:  {{ fengtaicount }}, name: '丰台'},
+                {value:  {{ shijingshancount }}, name: '石景山'}
+            ],
+            emphasis: {
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+if (option && typeof option === 'object') {
+    myChart2.setOption(option);
+}
+
+
+        </script>
+{% endblock javascripts %}

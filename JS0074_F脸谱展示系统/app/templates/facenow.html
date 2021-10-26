@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %} 修改密码 {% endblock title %}
+
+{% block content %}
+
+    <div class="row" style="margin-top: 100px">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header">
+                    脸谱识别
+                </div>
+                <form class="card-body" action="" method="post" enctype="multipart/form-data">
+
+                    <div class="mb-3 row">
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="inputPassword" name="file">
+                        </div>
+                              <div class="col-sm-2">
+                            <button class="btn btn-primary" type="submit">识别</button>
+                        </div>
+                    </div>
+
+                </form>
+                {% if data %}
+                       <h3>&nbsp;&nbsp;&nbsp;识别结果</h3>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img src="{{ data.face_url }}" alt="" style="width: 200px;height: 280px">
+                                               <h4>&nbsp;&nbsp;&nbsp;类目：{{ data.cate }}</h4>
+
+                    </div>
+
+                   <div class="col-sm-8">
+                       <div style="margin-top: 10px">
+
+
+                           <form class="card-body" action="/feedback" method="post" enctype="multipart/form-data">
+                                                      <h5>问题反馈</h5>
+
+
+                    <div class="mb-3 row">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="inputPassword" name="face_url"  value="{{ data.face_url }}" style="display: none">
+                        </div>
+                             <div class="col-sm-12">
+                                 <textarea type="feedback" class="form-control" id="inputPassword" name="feedback" rows="10" placeholder="请描述您遇到的问题"></textarea>
+                        </div>
+                              <div class="col-sm-12" style="margin-top: 10px">
+                            <button class="btn btn-primary" type="submit">反馈</button>
+                        </div>
+                    </div>
+
+                </form>
+                                                  </div>
+
+
+                    </div>
+
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}

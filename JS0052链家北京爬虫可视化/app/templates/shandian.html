@@ -1,0 +1,111 @@
+{% extends "base_site.html" %}
+
+{% block title %} Dashboard 1 {% endblock title %}
+
+{% block stylesheets %}
+  {{ super() }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <!-- top tiles -->
+
+
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="dashboard_graph">
+
+          <div class="row x_title">
+            <div class="col-md-6">
+              <h3>散点图</h3>
+            </div>
+
+          </div>
+          <div class="row" style="text-align:center">
+          <h4>北京</h4>
+          <div class="col-sm-3"></div>
+
+<div class="col-sm-6"  id="container" style="height: 400px"></div>
+          <div class="col-sm-3"></div>
+</div>
+          <div class="row" style="text-align:center">
+               <h4>东城区</h4>
+
+          <div class="col-sm-3"></div>
+
+<div class="col-sm-6"  id="container2" style="height: 400px"></div>
+
+
+</div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ super()}}
+
+
+        <script type="text/javascript">
+var dom = document.getElementById("container");
+var dom2 = document.getElementById("container2");
+var myChart = echarts.init(dom);
+var myChart2 = echarts.init(dom2);
+var app = {};
+
+var option;
+
+
+
+option = {
+    xAxis: {
+    },
+    yAxis: {
+        type: 'category',
+
+    },
+ series: [{
+        symbolSize: 3,
+        data: [{{ allinfo }}
+        ],
+        type: 'scatter'
+    }]
+
+};
+
+
+if (option && typeof option === 'object') {
+    myChart.setOption(option);
+}
+
+
+option = {
+    xAxis: {
+    },
+    yAxis: {
+        type: 'category',
+
+    },
+ series: [{
+        symbolSize: 3,
+        data: [{{ dongchegnData }}
+        ],
+        type: 'scatter'
+    }]
+
+};
+
+
+if (option && typeof option === 'object') {
+    myChart2.setOption(option);
+}
+
+
+        </script>
+{% endblock javascripts %}

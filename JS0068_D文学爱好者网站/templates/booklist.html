@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+    <h3 style="margin-top: 30px">分类展示</h3>
+
+    <ul class="nav nav-tabs" style="margin-top: 20px">
+        {% for foo in category %}
+            <li class="nav-item">
+                <a class="nav-link {% ifequal foo.name category_name %}
+    active
+    {% endifequal %}" aria-current="page" href="/book/list/?category={{ foo.name }}">{{ foo.name }}</a>
+            </li>
+
+        {% endfor %}
+
+    </ul>
+
+    <div class="row" style="margin-top: 40px">
+        {% for foo in books %}
+            <div class="col-sm-2" style="text-align: center">
+                <img src="/{{ foo.pic }}" class="card-img-top" alt="..." style="width: 80%;margin: 0 auto">
+                <a href="/book/detail/?id={{foo.id}}"  style="text-decoration: none;color: black">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ foo.title }}</h5>
+                        <p class="card-text">
+                            {{ foo.detail }}</p>
+                    </div>
+                </a>
+
+            </div>
+
+
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

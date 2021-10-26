@@ -1,0 +1,77 @@
+{% extends "base_site.html" %}
+{% load static %}
+{% block title %} Tables {% endblock title %}
+
+{% block stylesheets %}
+    {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>文件管理
+                        <small></small>
+                    </h3>
+                </div>
+
+            </div>
+
+            <div class="clearfix"></div>
+
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                               <div class="row">
+            <div class="col-sm-4">
+                <a class="btn btn-primary" href="/file/add/?id={{ id }}">添加</a>
+            </div>
+        </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>文件名</th>
+
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for datum in fileList %}
+                                    <tr>
+                                        <td>{{ datum.title }}</td>
+                                        <td>
+                                            <a type="button" class="btn btn-danger"
+                                               href="/file/del/?id={{ datum.id }}&fileid={{ id }}">删除</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ block.super }}
+{% endblock javascripts %}
+
+
+

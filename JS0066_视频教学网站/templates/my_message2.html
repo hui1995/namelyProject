@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="jumbotron" style="margin-top: 20px">
+        <h4>留言回复</h4>
+    </div>
+    <ul class="list-group">
+            {% for foo in result %}
+            <li type="button" class="list-group-item list-group-item-action">
+                <div class="row" style="height: 50px">
+                    <div class="col-sm-3">
+
+                        <span>教师：{{ foo.user.username }}</span>
+                    </div>
+                    <div class="col-sm-6">
+                        主题：{{ foo.main.content }}
+                    </div>
+                    <div class="col-sm-3">
+                        {{ foo.main.create_time }}
+                    </div>
+                </div>
+
+                <ul >
+                    {% for foo2 in foo.child %}
+                        <li class="row" style="height: 30px;font-size: 13px">
+                            <div class="col-sm-2">
+                                {{ foo2.user.username }}:
+                            </div>
+                            <div class="col-sm-6">
+                                {{ foo2.replay }}
+                            </div>
+
+                        </li>
+
+
+
+                    {% endfor %}
+                </ul>
+                    <div class="col-sm-12" style="text-align:right;color:blue;font-size:13px"><a href="javascript:void(0);"
+                                                                                             class="replay">回复</a>
+                </div>
+                <div class="sol-sm-12 child_replay" style="display:none">
+                    <form action="/message/add/?id={{ foo.main.id }}&back=me" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                        <textarea class="form-control" rows="3"
+                                  name="replay"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn-primary btn" type="submit"> 提交回复</button>
+                        </div>
+                    </form>
+
+                </div>
+                <hr>
+
+    </li>
+
+            {% endfor %}
+    </ul>
+
+       <script>
+
+        $('.replay').click(function () {
+            $(".child_replay").css("display", "none");
+            console.log($(this).parent().next().css("display", "block"))
+        })
+
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}楼层{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-6 column">
+            </div>
+            <div class="col-md-6 column">
+            </div>
+        </div>
+        <div class="row clearfix" style="margin-top: 30px">
+            <div class="col-md-12 column">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>
+                            教室名
+                        </th>
+                        {% for foo in longList %}
+                            <th>
+                                {{ foo.name }}
+
+                            </th>
+
+                        {% endfor %}
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for foo in data %}
+
+                        <tr>
+                            <td>
+                                {{ foo.name }}
+                            </td>
+                            {% for foo2 in foo.seatList %}
+                                <td {% if foo2.haveUser %}
+                                    style="background-color: grey"
+                                {% endif %} >{% if foo2.haveUser %}{% else %}
+                                    <a href="/appointment/?id={{ foo2.id }}&foor={{ id }}&date={{ date }}">预约</a>{% endif %}
+                                </td>
+                            {% endfor %}
+
+
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        {% if msg %}
+            alert("{{ msg }}")
+        {% endif %}
+
+    </script>
+{% endblock %}

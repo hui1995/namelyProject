@@ -1,0 +1,58 @@
+{% extends "base_site.html" %}
+
+{% block title %} Tables {% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>算法评论 <small></small></h3>
+            </div>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+
+                        <div class="clearfix"></div>
+                    </div>
+
+
+                    <div style="width: 100%;">
+                        <h4>1.量子群演化算法：</h4>
+                        <p> 量子群演化算法具有种群多样性好、全局搜索能力强、收敛速度快等优点,
+                            在处理高维数据时，利用量子群演化算法能够更有效地减少特征维数,提供一个低维、高相关性的特征子集，消除了冗余和不相关的特征，不仅减少了总处理时间，还提高了分类正确率和分类效率。
+                        </p>
+                        <h4>2.遗传算法：</h4>
+                        <p> 遗传算法能够求出优化问题的全局最优解，具有较强的鲁棒性，并且优化结果与初始条件无关，适合于求解复杂的优化问题。但遗传算法同时也具有收敛速度慢、局部搜索能力差和控制变量多等缺点。
+                        </p>
+                        <h4>3.蚁群算法：</h4>
+                        <p>
+                            蚁群算法采用正反馈机制，使得搜索过程不断收敛，最终逼近最优解。并且其搜索过程采用分布式计算方式，多个个体同时进行并行计算，大大提高了算法的计算能力和运行效率。但蚁群算法同时也具有收敛速度慢、容易陷入局部最优解、存在种群多样性与收敛速度的矛盾等问题。
+                        </p>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+{{ block.super }}
+{% endblock javascripts %}
+
+
+

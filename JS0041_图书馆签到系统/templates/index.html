@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}主页{% endblock %}
+{% block content %}
+    {% if request.session.is_login %}
+        <h1>你好,{{ request.session.user_name }}！欢迎回来！</h1>
+        <img class="img-responsive center-block" src="{% static "images/index.jpg" %}"/>
+        <div style="text-align:center;margin-top: 20px">
+            {% if haveLearn2 %}
+                <a type="button" class="btn btn-default btn-primary" href="/here/">签到</a>
+            {% else %}
+                <a type="button" class="btn btn-default btn-primary" href="#">暂无预约</a>
+
+            {% endif %}
+            &emsp;&emsp;&emsp;&emsp;
+            {% if haveLearn %}
+                <a type="button" class="btn btn-default btn-primary" href="/nohere/?type=1">签离</a>
+            {% else %}
+                {% if  haveLearn2 %}
+                    <a type="button" class="btn btn-default btn-primary" href="/nohere/?type=2">取消预约</a>
+
+                {% else %}
+                    <a type="button" class="btn btn-default btn-primary" href="#">无正在进行的自习</a>
+
+                {% endif %}
+
+            {% endif %}
+
+        </div>
+    {% else %}
+        <h1>你尚未登录，只能访问公开内容！</h1>
+    {% endif %}
+{% endblock %}

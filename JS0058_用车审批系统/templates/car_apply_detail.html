@@ -1,0 +1,179 @@
+{% extends "base_site.html" %}
+
+{% block title %} 用户管理 {% endblock title %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>{% if carApply %}
+                        审核详情
+                    {% endif %} </h3>
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            <form class="form-horizontal form-label-left" method="post">
+                                {% csrf_token %}
+
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"> 申请依据<span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="name" class="form-control col-md-7 col-xs-12" name="basis"
+                                               type="text"
+                                               value="{% if carApply %}{{ carApply.basis }}{% endif %}" readonly>
+
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">申请地点 <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="name" class="form-control col-md-7 col-xs-12" name="place"
+                                               required="required" type="text"
+                                               value="{% if carApply %}{{ carApply.place }}{% endif %}" readonly>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">申请事由 <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="name" class="form-control col-md-7 col-xs-12" name="cause"
+                                               required="required" type="text"
+                                               value="{% if carApply %}{{ carApply.cause }}{% endif %}" readonly>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">申请目的地 <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="name" class="form-control col-md-7 col-xs-12" name="desti"
+                                               type="text"
+                                               value="{% if carApply %}{{ carApply.desti }}{% endif %}" readonly>
+
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">申请人数 <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="name" class="form-control col-md-7 col-xs-12" name="penum"
+                                               type="number"
+                                               value="{% if carApply %}{{ carApply.penum }}{% endif %}" readonly>
+
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">申请使用时间 <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="name" class="form-control col-md-7 col-xs-12" name="usetime"
+                                               type="date"
+                                               value="{% if carApply %}{{ carApply.usetime|date:'Y-m-d' }}{% endif %}"
+                                               readonly>
+
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">取车时间 <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="name" class="form-control col-md-7 col-xs-12" name="gettime"
+                                               type="date"
+                                               value="{% if carApply %}{{ carApply.gettime|date:'Y-m-d' }}{% endif %}"
+                                               readonly>
+
+                                    </div>
+                                </div>
+                                <table class="table">
+                                    <thead>
+
+                                    <tr>
+                                        <th>审核流程</th>
+                                        <th>审核人</th>
+                                        <th>审核状态</th>
+                                        <th>审核意见</th>
+                                        <th>审核时间</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for datum in carApplyLink %}
+                                        <tr>
+                                            <td>{% ifequal forloop.counter 1 %}
+                                                部门领导
+                                            {% endifequal %}
+                                                {% ifequal forloop.counter 2 %}
+                                                    后勤部管理员
+                                                {% endifequal %}
+                                                {% ifequal forloop.counter 3 %}
+                                                    后勤部领导
+                                                {% endifequal %}
+                                                {% ifequal forloop.counter 4 %}
+                                                    副主管
+                                                {% endifequal %}
+                                                {% ifequal forloop.counter 5 %}
+                                                    主管
+                                                {% endifequal %}
+                                            </td>
+                                            <td>{{ datum.userId.name }}</td>
+                                            <td>{% ifequal datum.status "waiting" %}
+                                                待审核
+                                            {% endifequal %}
+                                                {% ifequal datum.status "pass" %}
+                                                    审核通过
+                                                {% endifequal %}
+                                                {% ifequal datum.status "fail" %}
+                                                    审核未通过
+                                                {% endifequal %}</td>
+                                            <td>{% if datum.remark %}{{ datum.remark }}{% endif %}</td>
+                                            <td>{{ datum.update_time }}</td>
+
+
+                                        </tr>
+                                    {% endfor %}
+
+
+                                    </tbody>
+                                </table>
+
+
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <a type="submit" class="btn btn-primary" href="/car/apply/list">返回</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ block.super }}
+    <!-- validator -->
+    <script src="/static/vendors/validator/validator.js"></script>
+{% endblock javascripts %}

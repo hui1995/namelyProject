@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}个人中心{% endblock %}
+{% block content %}
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-4 column">
+			 <a href="/message/"><button type="button" class="btn btn-lg btn-block btn-primary">我的信息</button></a>
+        </div>
+		<div class="col-md-4 column">
+			 <a href="/order/"><button type="button" class="btn btn-lg btn-block btn-primary">我的预约</button></a>
+		</div>
+		<div class="col-md-4 column">
+			 <a href="/violate/"><button type="button" class="btn btn-lg btn-block btn-primary">我的违约</button></a>
+		</div>
+	</div>
+	<div class="row clearfix" style="margin-top: 30px">
+		<div class="col-md-12 column">
+			<div class="row clearfix">
+				<div class="col-md-8 column">
+					<img class="img-responsive center-block" src="{% static "images/center.jpg" %}" />
+				</div>
+				<div class="col-md-4 column">
+					<div class="row clearfix">
+						<div class="col-md-12 column">
+							<h3 style="margin-top: 50%">
+								山东中医药大学自习教室管理系统
+							</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <h1 style="margin-top: 40px">
+        我的收藏
+    </h1>
+
+    <div class="row">
+
+        {% for foo in result %}
+            <div class="col-sm-3">
+                <div class="card" style="width: 18rem;margin: 0 auto;margin-top: 20px">
+                    <img src="{{ foo.face_url }}" class="card-img-top" alt="..."
+                         style="height: 260px;width: 100%;margin: 0 auto">
+                    <div class="card-body">
+                            <a href="/collect/face/?id={{ foo.id }}{% if catenow %}&cate={{ catenow.id }}{% endif %}{% if keyword %}&keyword={{ keyword }}{% endif %}&back=me"
+                               class="btn btn-primary">取消收藏</a>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        {% endfor %}
+    </div>
+
+{% endblock %}

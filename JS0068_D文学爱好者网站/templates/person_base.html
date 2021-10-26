@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+
+
+    <div class="row">
+        <div class="col-sm-3" style="border-right:1px solid #efe3e3;min-height:600px">
+            <div class="panel panel-default">
+                <div calss="panel-body" style="text-align:center">
+                    <div style="marign-top:10px"><h2>个人主页</h2></div>
+                    <img src="{% static user.pic %}" class="img-responsive img-rounded img-thumbnail"
+                         style="width:200px;margin:0 auto">
+                    <p class="text-center text-primary">{{ user.username }}</p>
+                    <address>
+                        {% ifequal request.user user %}
+                            <a class="glyphicon glyphicon-home" title="Address" href="/person/"> 个人资料</a><br>
+                            <a class="glyphicon glyphicon-file" title="PostalCode"
+                               href="/artile/list/?id={{ user.id }}"> 我的随笔</a><br>
+                            <a class="glyphicon glyphicon-file" title="PostalCode" href="/me/message/?id={{ user.id }}">
+                                留言板</a><br>
+                            <a class="glyphicon glyphicon-file" title="PostalCode" href="/collect/book/"> 我的书单</a><br>
+                            <a class="glyphicon glyphicon-file" title="PostalCode" href="/book/message/my/"> 我的书评</a>
+                            <br>
+                        {% else %}
+                            <a class="glyphicon glyphicon-file" title="PostalCode"
+                               href="/artile/list/?id={{ user.id }}"> 他的随笔</a><br>
+                            <a class="glyphicon glyphicon-file" title="PostalCode" href="/me/message/?id={{ user.id }}">
+                                留言板</a><br>
+                        {% endifequal %}
+                    </address>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-9">
+            {% block person %}
+
+            {% endblock %}
+        </div>
+    </div>
+
+{% endblock %}

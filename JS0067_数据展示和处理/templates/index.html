@@ -1,0 +1,62 @@
+{% extends "base_site.html" %}
+
+{% block title %} Tables {% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>算法介绍 <small></small></h3>
+            </div>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+
+                        <div class="clearfix"></div>
+                    </div>
+
+
+                    <div style="width: 100%;">
+                        <h4> 1.量子群演化算法：</h4>
+                        <p>
+                            量子群演化算法是量子计算与进化算法相结合的一种新的智能优化算法,使用量子位编码表示染色体,通过量子门更新染色体,这种独特的编码和进化机制使其在组合优化问题的求解中表现出良好的性能。同其他进化算法一样，QEA也以个体的表现、评价函数和种群动态为特征。然而不同的是，QEA没有使用二进制、数字或符号表示，QEA使用一个被定义为最小信息单位的Q-bit作为概率表示，一个Q-bit个体作为一串Q-bits，并引入了Q-gate作为变异算子来驱动个体寻找更好的解。
+                        </p>
+                        <h4> 2.遗传算法:</h4>
+                        <p>
+                            遗传算法是模拟达尔文生物进化论的自然选择和遗传学机理的生物进化过程的计算模型，是一种通过模拟自然进化过程搜索最优解的方法。遗传算法以一种群体中的所有个体为对象，并利用随机化技术指导对一个被编码的参数空间进行高效搜索。其中，选择、交叉和变异构成了遗传算法的遗传操作；参数编码、初始群体的设定、适应度函数的设计、遗传操作设计、控制参数设定五个要素组成了遗传算法的核心内容。
+                        </p>
+                        <h4> 3.蚁群算法：</h4>
+                        <p>
+                            蚁群算法是根据模拟蚂蚁寻找食物的最短路径行为来设计的仿生算法，最早是由Marco
+                            Dorigo等人提出，他们在研究新型算法的过程中，发现蚁群在寻找食物时，通过分泌一种称为信息素的生物激素交流觅食信息从而能快速的找到目标，据此提出了基于信息正反馈原理的蚁群算法。蚁群算法的基本思想来源于自然界蚂蚁觅食的最短路径原理，根据昆虫科学家的观察，发现自然界的蚂蚁虽然视觉不发达，但它们可以在没有任何提示的情况下找到从食物源到巢穴的最短路径，并在周围环境发生变化后，自适应地搜索新的最佳路径。
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+{{ block.super }}
+{% endblock javascripts %}
+
+
+

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}查询预约{% endblock %}
+{% block content %}
+    <div class="container">
+        <form class="row clearfix" method="get">
+            <div class="col-md-3 column">
+                <div class="btn-group">
+
+                    <select class="btn btn-default" name="campus">
+                        {% for foo in campusList %}
+
+                            <option value="{{ foo.id }}" {% ifequal foo.id campus %}
+                                    selected
+                            {% endifequal %}>
+                                {{ foo.name }}
+                            </option>
+
+                        {% endfor %}
+
+
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 column">
+                <div class="btn-group">
+
+                    <select class="btn btn-default" name="teachingbuilding">
+                        {% for foo in teachingbuildinglist %}
+
+                            <option value="{{ foo.id }}" {% ifequal foo.id teachingbuilding %}
+                                    selected
+                            {% endifequal %} >
+                                {{ foo.name }}
+                            </option>
+
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 column">
+                <div class="btn-group">
+                    <input type="date" value="{% if dateS %}{{ dateS }}{% else %}{{ today }}{% endif %}" name="dateS"
+                           class="btn-default btn"/>
+                </div>
+            </div>
+
+            <div class="col-md-3 column">
+                <div class="btn-group">
+                    <input type="submit" value="查询" class="btn-default btn"/>
+
+
+                </div>
+            </div>
+        </form>
+        <div class="row clearfix" style="margin-top: 30px;">
+            <div class="col-md-6 column">
+                <img class="img-responsive center-block" src="{% static "images/inquire.jpg" %}"/>
+            </div>
+            <div class="col-md-6 column">
+                {% for foo in foorlist %}
+                                <div class="row clearfix">
+                    <div class="col-md-4 column" style="margin-top: 15px">
+                        <a href="/floor/?id={{foo.id }}&date={{ dateS }}">
+                            <button type="button" class="btn btn-primary btn-lg">{{ foo.name }}</button>
+                        </a>
+                    </div>
+                    <div class="col-md-6 column">
+                        <h3 class="text-info">
+                            请选择楼层
+                        </h3>
+                    </div>
+                </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

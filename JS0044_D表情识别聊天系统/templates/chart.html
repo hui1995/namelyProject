@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+       
+    <meta charset="utf-8">
+       
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       
+    <meta name="format-detection" content="telephone=no">
+       
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+       
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+       
+    <meta name="mobile-web-app-capable" content="yes">
+       
+    <meta name="apple-mobile-web-app-capable" content="yes">
+       
+    <meta content="yes" name="apple-mobile-web-app-capable">
+       
+    <meta content="yes" name="apple-touch-fullscreen">
+       
+    <meta name="full-screen" content="yes">
+       
+    <meta content="default" name="apple-mobile-web-app-status-bar-style">
+       
+    <meta name="screen-orientation" content="portrait">
+       
+    <meta name="browsermode" content="application">
+       
+    <meta name="msapplication-tap-highlight" content="no">
+       
+    <meta name="x5-orientation" content="portrait">
+       
+    <meta name="x5-fullscreen" content="true">
+       
+    <meta name="x5-page-mode" content="app">
+       
+    <base target="_blank">
+        <title>会话_聊天机器人</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+       
+    <link rel="stylesheet" href="/static/css/chat.css">
+</head>
+<body lang="zh">
+   
+<div class="abs cover contaniner">
+           
+    <div class="abs cover pnl">
+                   
+        <div class="top pnl-head"></div>
+                   
+        <div class="abs cover pnl-body" id="pnlBody">
+                           
+            <div class="abs cover">
+                                   
+                <div class="abs cover pnl-msgs scroll" id="show">
+                                           
+                    <div class="pnl-list" id="hists">
+                                                    <!-- 历史消息 -->
+                                               
+                    </div>
+                                           
+                    <div class="pnl-list" id="msgs">
+                                                   
+                        <div class="msg robot">
+                                                           
+                            <div class="msg-left" worker="机器人">
+                                                                   
+                                <div class="msg-host photo"
+                                     style="background-image: url(/static/images/robot.jpeg)"></div>
+                                <div class="msg-ball" title="今天 17:52:06">你好，我是只能打字的聊天机器人                <br><br>
+                                </div>
+                                                               
+                            </div>
+                        </div>
+                    </div>
+                                         
+                                       
+                </div>
+                                   
+                <div class="abs bottom pnl-text">
+                                           
+                    <div class="abs top pnl-warn" id="pnlWarn">
+                                             
+                                               
+                    </div>
+                    <div class="abs cover pnl-input">
+                 <textarea class="scroll" id="text" wrap="hard"
+                           placeholder="在此输入文字信息..."></textarea>
+                                                   
+                        <div class="abs atcom-pnl scroll hide" id="atcomPnl">
+                                                           
+                            <ul class="atcom" id="atcom"></ul>
+                                                       
+                        </div>
+                                               
+                    </div>
+                                           
+                    <div class="abs br pnl-btn" id="submit"
+                         style="background-color: rgb(32, 196, 202); color: rgb(255, 255, 255);" onclick="SendMsg()">发送
+                    </div>
+                                       
+                </div>
+                               
+            </div>
+                       
+        </div>
+               
+    </div>
+       
+</div>
+</body>
+</html>
+
+<script>
+    function SendMsg() {
+        var text = document.getElementById("text");
+        if (text.value == "" || text.value == null) {
+            alert("发送信息为空，请输入！")
+        } else {
+            AddMsg('default', SendMsgDispose(text.value));
+
+            $.get("/now/chart?type={{ chartType }}&content=" + text.value, function (data) {
+                text.value = "";
+
+                AddMsg('机器人', SendMsgDispose(data.aswer));
+                text.value = "";
+
+
+            })
+        }
+    }
+
+    // 发送的信息处理
+    function SendMsgDispose(detail) {
+        detail = detail.replace("\n", "<br>").replace(" ", "&nbsp;")
+        return detail;
+    }
+
+    // 增加信息
+    function AddMsg(user, content) {
+        var str = CreadMsg(user, content);
+        var msgs = document.getElementById("msgs");
+        msgs.innerHTML = msgs.innerHTML + str;
+    }
+
+    // 生成内容
+    function CreadMsg(user, content) {
+        var str = "";
+        if (user == 'default') {
+            str = "<div class=\"msg guest\"><div class=\"msg-right\"><div class=\"msg-host headDefault\"></div><div class=\"msg-ball\" title=\"今天 17:52:06\">" + content + "</div></div></div>"
+        } else {
+            str = "<div class=\"msg robot\"><div class=\"msg-left\" worker=\"" + user + "\"><div class=\"msg-host photo\" style=\"background-image: url(/static/images/robot.jpeg)\"></div><div class=\"msg-ball\" title=\"今天 17:52:06\">" + content + "</div></div></div>";
+        }
+        return str;
+    }
+
+</script>

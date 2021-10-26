@@ -1,0 +1,33 @@
+{% extends "person_base.html" %}
+{% load static %}
+{% block person %}
+<div class="jumbotron">
+    <h4>我的随笔</h4>
+</div>
+<ul class="list-group">
+    {% for foo in articleList %}
+
+    <li type="button" class="list-group-item list-group-item-action">
+        <div class="row">
+
+
+            <div class="col-sm-7"><a href="/article/detail/?id={{ foo.id }}">{{ foo.title }}</a></div>
+            <div class="col-sm-3"><span>{{ foo.create_time }}</span></div>
+            {% ifequal request.user user %}
+
+            <div class="col-sm-2"><a href="/article/del/?id={{foo.id}}">删除</a></div>
+            {%endifequal %}
+
+            </div>
+
+    </li>
+
+    {% endfor %}
+</ul>
+
+{% ifequal request.user user %}
+<a class="btn btn-primary" href="/add/article/" style="margin-top:20px">发布随笔</a>
+{%endifequal %}
+
+
+{% endblock %}

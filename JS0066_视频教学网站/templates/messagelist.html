@@ -1,0 +1,81 @@
+{% extends "base_site.html" %}
+
+{% block title %} Tables {% endblock title %}
+
+{% block stylesheets %}
+    {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>留言管理
+                        <small></small>
+                    </h3>
+                </div>
+
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>学生</th>
+                                    <th>留言内容</th>
+                                    <th>留言时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for datum in messagelist %}
+                                    <tr>
+                                        <td>{{ datum.stu.username }}</td>
+                                        <td>{{ datum.content }}</td>
+                                        <td>{{ datum.create_time }}</td>
+
+
+                                        <td>
+                                        <td>{% if datum.replay %}
+
+                                        {% else %}
+
+                                            <a type="button" class="btn btn-danger"
+                                               href="/message/add/?id={{ datum.id }}">回复</a>
+                                        {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ block.super }}
+{% endblock javascripts %}
+
+
+

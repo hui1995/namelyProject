@@ -1,0 +1,89 @@
+{% extends "base_site.html" %}
+{% load static %}
+{% block title %} Tables {% endblock title %}
+
+{% block stylesheets %}
+    {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>视频管理
+                        <small></small>
+                    </h3>
+                </div>
+
+            </div>
+
+            <div class="clearfix"></div>
+
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                               <div class="row">
+            <div class="col-sm-4">
+                <a class="btn btn-primary" href="/video/add/">添加</a>
+            </div>
+        </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>标题</th>
+                                    <th>封面图</th>
+                                    <th>创建时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for datum in videoList %}
+                                    <tr>
+                                        <td>{{ datum.title }}</td>
+                                        <td><img src="{% static datum.pic %}" alt="" style="width: 60px;height: 40px"></td>
+                                        <td>{{ datum.create_time }}</td>
+
+
+                                        <td>
+
+                                            <a type="button" class="btn btn-danger"
+                                               href="/video/add/?id={{ datum.id }}">编辑</a>
+
+                                            <a type="button" class="btn btn-danger"
+                                               href="/file/list/?id={{ datum.id }}">查看资料</a>
+
+                                            <a type="button" class="btn btn-danger"
+                                               href="/video/del/?id={{ datum.id }}">删除</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ block.super }}
+{% endblock javascripts %}
+
+
+

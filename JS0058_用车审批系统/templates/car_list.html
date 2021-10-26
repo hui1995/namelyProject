@@ -1,0 +1,148 @@
+{% extends "base_site.html" %}
+
+{% block title %} Tables {% endblock title %}
+
+{% block stylesheets %}
+    {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>车辆管理 <small></small></h3>
+                </div>
+
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    {% ifequal request.user.deptId.no "01" %}
+                                        <a type="button" class="btn btn-primary" href="/car/option/">添加</a>
+
+                                    {% endifequal %}
+
+                                </div>
+
+                                <div class="col-lg-6" style="margin-top: -15px">
+                                    <form class="bs-example bs-example-form" role="form">
+                                        <div class="row">
+                                            <br>
+                                            <div class="col-lg-10">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="keyword">
+                                                    <span class="input-group-btn">
+                        <button class="btn btn-info" type="submit">搜索</button>
+                    </span>
+                                                </div><!-- /input-group -->
+                                            </div><!-- /.col-lg-6 -->
+                                        </div><!-- /.row -->
+                                    </form>
+
+                                </div>
+                            </div>
+
+
+                            <table class="table">
+                                <thead>
+                                <tr>
+
+                                    <th>车牌编号</th>
+                                    <th>车型</th>
+                                    <th> 座位数</th>
+                                    <th>当前公里数</th>
+                                    <th>当前停放地址</th>
+                                    <th>车辆状态</th>
+                                    <th>代管部门</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for datum in page %}
+                                    <tr>
+                                        <td>{{ datum.no }}</td>
+                                        <td>{{ datum.type }}</td>
+                                        <td>{{ datum.nums }}</td>
+                                        <td>{{ datum.knmus }}</td>
+                                        <td>{{ datum.address }}</td>
+                                        <td>{{ datum.status }}</td>
+                                        <td>{{ datum.dept.name }}</td>
+
+                                        <td>
+                                            <a type="button" class="btn btn-warning"
+                                               href="/car/option/?id={{ datum.id }}">编辑</a>
+                                            {% ifequal datum.dept.no "01" %}
+                                                {% ifequal datum.status "空闲" %}
+
+                                                    <a type="button" class="btn btn-info"
+                                                       href="/car/allocation/?id={{ datum.id }}">分配车辆</a>
+                                                {% endifequal %}
+                                            {% endifequal %}
+
+                                            <a type="button" class="btn btn-danger"
+                                               href="/car/del/?id={{ datum.id }}">删除</a>
+
+                                            <a type="button" class="btn btn-primary"
+                                               href="/car/option/list/?id={{ datum.id }}">操作记录</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+
+                                </tbody>
+                            </table>
+                            <ul class="pagination">
+
+                                {% for foo in page.paginator.page_range %}
+                                    {% ifequal foo page.number %}
+                                        <li class="active"><a href="/car/list/?page=
+
+
+
+
+
+                                                {{ foo }}{% if keyword %}&keyword={{ keyword }}{% endif %}">{{ foo }}</a>
+                                        </li>
+                                    {% else %}
+                                        <li><a href="/car/list/?page=
+
+
+
+
+
+                                                {{ foo }}{% if keyword %}&keyword={{ keyword }}{% endif %}">{{ foo }}</a>
+                                        </li>
+
+                                    {% endifequal %}
+                                {% endfor %}
+
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ block.super }}
+{% endblock javascripts %}
+
+
+

@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block title %}我的预约{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <h3 class="text-center">
+                            我的预约
+                        </h3>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>
+                                    校区
+                                </th>
+                                <th>
+                                    楼层
+                                </th>
+                                <th>
+                                    教室
+                                </th>
+                                <th>
+                                    位置
+                                </th>
+                                <th>
+                                    时间
+                                </th>
+                                <th>
+                                    状态
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for foo in appointmentList %}
+                                <tr>
+                                    <td>
+                                        {{ foo.seat.classRoom.foor.campus.name }}
+
+                                    </td>
+                                    <td>
+                                        {{ foo.seat.classRoom.foor.name }}
+
+                                    </td>
+                                    <td>
+                                        {{ foo.seat.classRoom.name }}
+
+                                    </td>
+                                    <td>
+                                        {{ foo.seat.name }}
+                                    </td>
+                                    <td>
+                                        {{ foo.appoint_date }}
+                                    </td>
+                                    <td>
+                                        {% ifequal foo.status 0 %}
+                                            预约成功
+                                        {% else %}
+                                            {% ifequal foo.status 1 %}
+                                                占位中
+                                            {% else %}
+                                                {% ifequal foo.status 2 %}
+                                                    离开
+                                                {% else %}
+                                                    {% ifequal foo.status 3 %}
+                                                        未签到
+                                                    {% else %}
+                                                              {% ifequal foo.status 4 %}
+                                                        未签离
+                                                    {% else %}
+                                                                          {% ifequal foo.status 5 %}
+                                                        取消预约
+                                                    {% else %}
+                                                    {% endifequal %}
+                                                    {% endifequal %}
+                                                    {% endifequal %}
+                                                {% endifequal %}
+                                            {% endifequal %}
+                                        {% endifequal %}
+
+                                    </td>
+                                </tr>
+
+
+                            {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

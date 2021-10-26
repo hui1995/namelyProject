@@ -1,0 +1,132 @@
+{% extends "base_site.html" %}
+
+{% block title %} Tables {% endblock title %}
+
+{% block stylesheets %}
+    {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>员工管理 <small></small></h3>
+                </div>
+
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-lg-6">
+
+                                </div>
+
+                                <div class="col-lg-6" style="margin-top: -15px">
+                                    <form class="bs-example bs-example-form" role="form">
+                                        <div class="row">
+                                            <br>
+                                            <div class="col-lg-10">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="keyword">
+                                                    <span class="input-group-btn">
+                        <button class="btn btn-info" type="submit">搜索</button>
+                    </span>
+                                                </div><!-- /input-group -->
+                                            </div><!-- /.col-lg-6 -->
+                                        </div><!-- /.row -->
+                                    </form>
+
+                                </div>
+                            </div>
+
+
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>姓名</th>
+                                    <th>警号</th>
+                                    <th>手机号码</th>
+                                    <th>部门编号</th>
+                                    <th>角色</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for datum in page %}
+                                    <tr>
+                                        <td>{{ datum.name }}</td>
+                                        <td>{{ datum.username }}</td>
+                                        <td>{{ datum.phone }}</td>
+                                        <td>{{ datum.deptId.name }}</td>
+                                        <td>{% ifequal datum.role 0 %}
+                                        公交车管理员
+                                        {% endifequal %}
+                                        {% ifequal datum.role 1 %}
+                                        部门领导
+                                        {% endifequal %}
+                                        {% ifequal datum.role 2 %}
+                                        副主官
+                                        {% endifequal %}
+                                        {% ifequal datum.role 3 %}
+                                        主官
+                                        {% endifequal %}
+                                     </td>
+
+                                        <td>
+                                            <a type="button" class="btn btn-warning"
+                                               href="/user/edit/?id={{ datum.id }}">编辑</a>
+                                            <a type="button" class="btn btn-danger"
+                                               href="/user/del/?id={{ datum.id }}">删除</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+
+                                </tbody>
+                            </table>
+                            <ul class="pagination">
+
+                                {% for foo in page.paginator.page_range %}
+                                    {% ifequal foo page.number %}
+                                        <li class="active"><a href="/user/list/?page=
+                                                {{ foo }}{% if keyword %}&keyword={{ keyword }}{% endif %}">{{ foo }}</a>
+                                        </li>
+                                    {% else %}
+                                        <li><a href="/user/list/?page=
+
+
+
+                                                {{ foo }}{% if keyword %}&keyword={{ keyword }}{% endif %}">{{ foo }}</a>
+                                        </li>
+
+                                    {% endifequal %}
+                                {% endfor %}
+
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ block.super }}
+{% endblock javascripts %}
+
+
+

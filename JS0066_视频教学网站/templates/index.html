@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+    <div class="row">
+        {% for foo in video %}
+            <div class="col-sm-4">
+                <div class="card" style="width: 24rem;margin: 0 auto;margin-top: 20px">
+                    <img src="{% static foo.pic%}" class="card-img-top" alt="..." style="height: 260px;width: 100%;margin: 0 auto">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ foo.title }}</h5>
+
+                        <a href="/video/detail/?id={{ foo.id }}" class="btn btn-primary">开始学习</a>
+                    </div>
+                </div>
+
+            </div>
+
+
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

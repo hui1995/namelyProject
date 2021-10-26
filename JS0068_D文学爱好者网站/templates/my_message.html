@@ -1,0 +1,43 @@
+{% extends "person_base.html" %}
+{% load static %}
+{% block person %}
+<div class="jumbotron">
+    <h4>留言板</h4>
+</div>
+<ul class="list-group">
+    {% for foo in messageList %}
+
+    <li type="button" class="list-group-item list-group-item-action">
+        <div class="row">
+
+
+            <div class="col-sm-12">{{ foo.content }}</div>
+            <div class="col-sm-8" style="font-size:12px;margin-top:10px"><a href="/artile/list/?id={{foo.reply_user.id}}">用户：{{ foo.reply_user.username }}</a></div>
+            <div class="col-sm-4" style="font-size:12px;">{{foo.create_time }}</div>
+        </div>
+
+    </li>
+
+    {% endfor %}
+</ul>
+{% if request.user.is_authenticated %}
+<div class="row" style="margin-top: 10px">
+    <h3>提交留言</h3>
+    <div class="sol-sm-12">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                  name="message"></textarea>
+            </div>
+            <div class="mb-3">
+                <button class="btn-primary btn" type="submit">留言</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}

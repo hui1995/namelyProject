@@ -1,0 +1,25 @@
+{% extends "person_base.html" %}
+{% load static %}
+{% block person %}
+    <div class="jumbotron">
+        <h4>我的书评</h4>
+    </div>
+    <ul class="list-group">
+        {% for foo in comments %}
+
+            <li type="button" class="list-group-item list-group-item-action">
+                <div class="row">
+
+
+                    <div class="col-sm-2">书名：<a href="/book/detail/?id={{ foo.book.id }}">{{ foo.book.title }}</a></div>
+                    <div class="col-sm-6">{{ foo.content }}</div>
+                    <div class="col-sm-4"><a href="/book/message/del/?id={{ foo.id }}" class="btn btn-primary">删除</a></div>
+                </div>
+
+            </li>
+
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

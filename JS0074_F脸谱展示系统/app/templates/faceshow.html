@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <h1 style="margin-top: 40px">
+        {% if keyword %}
+            关键字：{{ keyword }}
+        {% else %}
+            {% if catenow %}
+                类目：{{ catenow.name }}
+            {% endif %}
+        {% endif %}
+    </h1>
+
+    <div class="row">
+        {% for foo in facelist %}
+            <div class="col-sm-3">
+                <div class="card" style="width: 18rem;margin: 0 auto;margin-top: 20px">
+                    <img src="{{ foo.face_url }}" class="card-img-top" alt="..."
+                         style="height: 260px;width: 100%;margin: 0 auto">
+                    <div class="card-body">
+                        {% if foo.collect %}
+                            <a href="/collect/face/?id={{ foo.id }}{% if catenow %}&cate={{ catenow.id }}{% endif %}{% if keyword %}&keyword={{ keyword }}{% endif %}"
+                               class="btn btn-primary">取消收藏</a>
+
+                        {% else %}
+
+                            <a href="/collect/face/?id={{ foo.id }}{% if catenow %}&cate={{ catenow.id }}{% endif %}{% if keyword %}&keyword={{ keyword }}{% endif %}"
+                               class="btn btn-primary">加入收藏</a>
+
+
+                        {% endif %}
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

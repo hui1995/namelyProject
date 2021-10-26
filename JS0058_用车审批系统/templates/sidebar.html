@@ -1,0 +1,57 @@
+<div class="left_col scroll-view">
+    <div class="navbar nav_title" style="border: 0;">
+        <a href="/admin/list/" class="site_title"><i class="fa fa-spinner"></i>
+            <span>用车审批系统</span></a>
+    </div>
+
+    <div class="clearfix"></div>
+
+
+    <br/>
+
+    <!-- sidebar menu -->
+    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+        <div class="menu_section">
+            <ul class="nav side-menu">
+                {% ifequal request.user.deptId.no "01" %}
+
+                    <li><a href="/dept/list/"><i class="fa"></i> 部门管理</a>
+
+                    <li><a href="/user/list/"><i class="fa"></i> 用户管理</a>
+
+                    </li>
+                {% endifequal %}
+                {% ifequal request.user.deptId.no "01" %}
+                    <li><a href="/car/list/"><i class="fa"></i> 车辆管理</a>
+                    </li>
+                {% else %}
+                    {% ifequal request.user.role 0 %}
+                        <li><a href="/car/list/"><i class="fa"></i> 车辆管理</a>
+                        </li>
+
+                    {% endifequal %}
+
+                {% endifequal %}
+
+
+
+                {% ifnotequal request.user.role 0 %}
+                    <li><a href="/car/auth/list/"><i class="fa"></i> 用车审核</a>
+                    </li>
+                {% else %}
+                    {% ifequal request.user.deptId.no "01" %}
+                        <li><a href="/car/auth/list/"><i class="fa"></i> 用车审核</a>
+                        </li>
+                    {% endifequal %}
+                {% endifnotequal %}
+                {% ifequal request.user.role 0 %}
+
+                    <li><a href="/car/apply/list/"><i class="fa"></i> 我的申请</a>
+                {% endifequal %}
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+</div>

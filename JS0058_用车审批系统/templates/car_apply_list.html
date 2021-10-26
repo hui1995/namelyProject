@@ -1,0 +1,148 @@
+{% extends "base_site.html" %}
+
+{% block title %} Tables {% endblock title %}
+
+{% block stylesheets %}
+    {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>申请管理 <small></small></h3>
+                </div>
+
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <a type="button" class="btn btn-primary" href="/car/apply/option/">申请</a>
+
+                                </div>
+
+                                <div class="col-lg-6" style="margin-top: -15px">
+                                    <form class="bs-example bs-example-form" role="form">
+                                        <div class="row">
+                                            <br>
+                                            <div class="col-lg-10">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="keyword">
+                                                    <span class="input-group-btn">
+                        <button class="btn btn-info" type="submit">搜索</button>
+                    </span>
+                                                </div><!-- /input-group -->
+                                            </div><!-- /.col-lg-6 -->
+                                        </div><!-- /.row -->
+                                    </form>
+
+                                </div>
+                            </div>
+
+
+                            <table class="table">
+                                <thead>
+
+                                <tr>
+                                    <th>部门</th>
+                                    <th>申请依据</th>
+                                    <th>申请地点</th>
+                                    <th>申请事由</th>
+                                    <th>申请目的地</th>
+                                    <th>申请使用时间</th>
+                                    <th>驱车时间</th>
+                                    <th>申请状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for datum in page %}
+                                    <tr>
+                                        <td>{{ datum.dept.name }}</td>
+                                        <td>{{ datum.basis }}</td>
+                                        <td>{{ datum.place }}</td>
+                                        <td>{{ datum.cause }}</td>
+                                        <td>{{ datum.desti }}</td>
+                                        <td>{{ datum.usetime }}</td>
+                                        <td>{{ datum.gettime }}</td>
+                                        <td>{% ifequal datum.status "waiting" %}
+                                            待审核
+                                        {% endifequal %}
+                                            {% ifequal datum.status "reviewing" %}
+                                                审核中
+                                            {% endifequal %}
+                                            {% ifequal datum.status "pass" %}
+                                                审核通过
+                                            {% endifequal %}{% ifequal datum.status "fail" %}
+                                                审核未通过
+                                            {% endifequal %}</td>
+
+                                        <td>
+                                            <a type="button" class="btn btn-danger"
+                                               href="/car/apply/detail/?id={{ datum.id }}">查看详情</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+
+                                </tbody>
+                            </table>
+                            <ul class="pagination">
+
+                                {% for foo in page.paginator.page_range %}
+                                    {% ifequal foo page.number %}
+                                        <li class="active"><a href="/car/apply/list/?page=
+
+
+
+
+
+                                                {{ foo }}{% if keyword %}&keyword={{ keyword }}{% endif %}">{{ foo }}</a>
+                                        </li>
+                                    {% else %}
+                                        <li><a href="/car/apply/list/?page=
+
+
+
+
+
+
+
+
+                                                {{ foo }}{% if keyword %}&keyword={{ keyword }}{% endif %}">{{ foo }}</a>
+                                        </li>
+
+                                    {% endifequal %}
+                                {% endfor %}
+
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ block.super }}
+{% endblock javascripts %}
+
+
+

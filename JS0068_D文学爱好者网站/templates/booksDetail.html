@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h1 style="margin-top: 30px">书籍详情</h1>
+
+    <div class="row" style="margin-top: 20px">
+        <div class="col-sm-3">
+            <img src="/{{ foo.pic }}" style="width: 250px;height: 300px">
+        </div>
+        <div class="col-sm-6">
+            <h2>{{ data.title }}</h2>
+            {% for foo in data.detail %}
+                <p>{{ foo }} </p>
+            {% endfor %}
+            <p>评论关键字：{% for foo in data.tags %} {{ foo }} &nbsp&nbsp{% endfor %}</p>
+            <!--        book/collect/-->
+            {% if collectBook %}
+                                <a class="btn btn-primary" href="/book/collect/?id={{ data.id }}">取消书单</a>
+
+            {% else %}
+                <a class="btn btn-primary" href="/book/collect/?id={{ data.id }}">加入书单</a>
+
+            {% endif %}
+        </div>
+        <div class="col-sm-2">
+            <h3>评分</h3>
+            <h4 style="color:red">{{ data.star }}</h4>
+        </div>
+    </div>
+    <hr>
+    <h3 style="margin-top: 20px">简介:</h3>
+    <div class="row" style="margin-top: 10px">
+        <div class="sol-sm-12">
+            <p>
+                {{ data.content }}
+            </p>
+        </div>
+    </div>
+    <hr>
+
+    <h3 style="margin-top: 20px">评论</h3>
+
+    <div class="row" style="margin-top: 10px">
+        <div class="sol-sm-12">
+            <hr>
+            {% for foo in commentlist %}
+                <div class="row" style="height: 50px">
+                    <div class="col-sm-3">
+
+                        <a href="/artile/list/?id={{ foo.main.user.id }}" style="font-size:14px"> <span><img src="{% static foo.main.user.pic %}" alt=""
+                                                                      style="width:30px;height:30px; border-radius: 50%;"> {{ foo.main.user.username }}</span>
+                        </a></div>
+                    <div class="col-sm-6">
+                        {{ foo.main.content }}
+                    </div>
+                    <div class="col-sm-3">
+                        {{ foo.main.create_time }}
+                    </div>
+                </div>
+                <div class="col-sm-12" style="text-align:right;color:blue;font-size:13px"><a href="javascript:void(0);"
+                                                                                             class="replay">回复</a>
+                </div>
+                <div class="sol-sm-12 child_replay" style="display:none">
+                    <form action="/add/comment/?id={{ foo.main.id }}" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                        <textarea class="form-control" rows="3"
+                                  name="message"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn-primary btn" type="submit"> 提交回复</button>
+                        </div>
+                    </form>
+
+                </div>
+                <ul class="card">
+                    {% for foo2 in foo.child %}
+                        <li class="row" style="height: 30px;font-size: 13px">
+                        <div class="col-sm-2">
+                           {{ forloop.counter }}楼：  <a href="/artile/list/?id={{ foo2.user.id }}">{{ foo2.user.username }}</a> :
+                        </div>
+                        <div class="col-sm-6">
+                            {{ foo2.content }}
+                        </div>
+
+                        </li>
+
+
+
+                    {% endfor %}
+                </ul>
+                <hr>
+
+
+            {% endfor %}
+        </div>
+    </div>
+    {% if request.user.is_authenticated %}
+        <div class="row" style="margin-top: 10px">
+            <h3>提交留言</h3>
+            <div class="sol-sm-12">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                  name="message"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn-primary btn" type="submit">留言</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    {% endif %}
+    <script>
+
+        $('.replay').click(function () {
+            $(".child_replay").css("display", "none");
+            console.log($(this).parent().next().css("display", "block"))
+        })
+
+
+    </script>
+
+
+{% endblock %}

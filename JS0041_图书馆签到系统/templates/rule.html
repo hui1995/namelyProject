@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}预约规则{% endblock %}
+{% block content %}
+    <div class="container" xmlns:text-align="http://www.w3.org/1999/xhtml">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="page-header">
+				<h1>
+					预约规则
+				</h1>
+			</div>
+			<ol>
+				<li>
+					学生登录成功后可通过查询空教室，对当日或次日空教室的空座位进行预约。
+				</li>
+				<li>
+					学生可实现对预约座位的签到，预约当日座位的签到时间应在预约成功后30分钟内完成签到。
+				</li>
+				<li>
+					预约次日座位的学生，需在次日9:00之前签到。
+				</li>
+				<li>
+					预约成功后未签到的学生将被记“未签到”违规1次，“未签到”违规满3次，将被暂停预约座位权利7天。
+				</li>
+				<li>
+					学生可在当日8:00之前取消当日的预约座位，8:00之后当日预约的座位不能取消；学生如需取消次日的预约座位，需要在次日8:00之前办理。
+				</li>
+				<li>
+					签离：学生可在主页进行签离操作，当日23:00前未签离的学生被记“未签离”违规一次，“未签离”违规满3次，将被暂停预约座位权利7天。
+				</li>
+			</ol>
+            <div style="text-align:center">
+            <a href="/index/"><button type="button" class="btn btn-default btn-primary">返回</button></a>
+            </div>
+		</div>
+	</div>
+</div>
+{% endblock %}

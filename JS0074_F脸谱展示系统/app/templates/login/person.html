@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %} 修改密码 {% endblock title %}
+
+{% block content %}
+
+    <div class="row" style="margin-top: 100px">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+<div class="card">
+  <div class="card-header">
+    个人中心
+  </div>
+  <form class="card-body" action="" method="post">
+
+  <div class="mb-3 row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">用户名</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputPassword" name="username" value="{% if user %}{{ user.username }}{% endif %}">
+    </div>
+  </div>
+        <div class="mb-3 row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">真实姓名</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputPassword" name="real_name" value="{% if user %}{{ user.real_name }}{% endif %}">
+    </div>
+  </div>
+             <div class="mb-3 row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">手机号</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputPassword" name="phone" value="{% if user %}{{ user.phone }}{% endif %}">
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+      <div class="col-sm-2"></div>
+    <div class="col-sm-10">
+ <button class="btn btn-primary" type="submit">修改</button>
+    </div>
+  </div>
+  </form>
+</div>
+
+    </div>
+</div>
+
+
+{% endblock %}
