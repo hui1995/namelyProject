@@ -1,0 +1,141 @@
+{% extends "base_site.html" %}
+
+{% block title %} Tables {% endblock title %}
+
+{% block stylesheets %}
+    {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>管理员状态审核 <small></small></h3>
+                </div>
+
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+
+                            <div class="clearfix"></div>
+                        </div>
+                        {% ifequal request.user.a_auth 3 %}
+
+                            <div class="x_content">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <a type="button" class="btn btn-primary" href="/admin/add/">添加</a>
+
+                                    </div>
+
+                                    <div class="col-lg-6" style="margin-top: -15px">
+                                        <form class="bs-example bs-example-form" role="form">
+                                            <div class="row">
+                                                <br>
+                                                <div class="col-lg-10">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="keyword">
+                                                        <span class="input-group-btn">
+                        <button class="btn btn-info" type="submit">搜索</button>
+                    </span>
+                                                    </div><!-- /input-group -->
+                                                </div><!-- /.col-lg-6 -->
+                                            </div><!-- /.row -->
+                                        </form>
+
+                                    </div>
+                                </div>
+
+
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>用户名</th>
+                                        <th>邮箱</th>
+                                        <th>手机号</th>
+                                        <th>权限</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for datum in datalist %}
+                                        <tr>
+                                            <td>{{ datum.admin.username }}</td>
+                                            <td>{{ datum.admin.email }}</td>
+                                            <td>{{ datum.admin.a_phone }}</td>
+                                            <td>                                            <td>{{datum.auth  }}
+
+                                            </td>
+                                            <td>
+                                                {% ifequal datum.admin.a_status 0 %}
+                                                    冻结
+                                                {% else %}
+                                                    正常
+                                                {% endifequal %}
+                                            </td>
+
+                                            <td>
+                                                {% ifequal datum.admin.a_status 0 %}
+                                                    <a type="button" class="btn btn-danger"
+                                                       href="/admin/status/change/?id={{ datum.admin.id }}&type=1">开通</a>
+
+                                                {% else %}
+                                                    <a type="button" class="btn btn-warning"
+                                                       href="/admin/status/change/?id={{ datum.admin.id }}&type=0">冻结</a>
+
+                                                {% endifequal %}
+
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+
+                                    </tbody>
+                                </table>
+                                <ul class="pagination">
+
+                                    {% for foo in page.paginator.page_range %}
+                                        {% ifequal foo page.number %}
+                                            <li class="active"><a href="/admin/list/?page=
+                                                    {{ foo }}{% if keyword %}&keyword={{ keyword }}{% endif %}">{{ foo }}</a>
+                                            </li>
+                                        {% else %}
+                                            <li><a href="/admin/list/?page=
+                                                    {{ foo }}{% if keyword %}&keyword={{ keyword }}{% endif %}">{{ foo }}</a>
+                                            </li>
+
+                                        {% endifequal %}
+                                    {% endfor %}
+
+
+                                </ul>
+
+                            </div>
+
+                        {% else %}
+                            <div style="width: 100%;height: 600px;line-height: 600px;text-align: center;font-weight: 700;font-size: 45px">
+                                您没有权限操作
+                            </div>
+
+                        {% endifequal %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ block.super }}
+{% endblock javascripts %}
+
+
+

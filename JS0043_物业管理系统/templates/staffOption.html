@@ -1,0 +1,193 @@
+{% extends "base_site.html" %}
+
+{% block title %} 职工管理 {% endblock title %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>{% if staff %}
+                        编辑用户
+                    {% else %}
+                        添加用户
+                    {% endif %} </h3>
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            <form class="form-horizontal form-label-left" method="post">
+                                {% csrf_token %}
+                                {% if msg %}
+                                    <div class="alert alert-warning">
+
+                                        <a href="#" class="close" data-dismiss="alert">
+                                            &times;
+                                        </a>
+                                        <strong>警告！</strong>{{ msg }}
+                                    </div>
+
+                                {% endif %}
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">工号 <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="name" class="form-control col-md-7 col-xs-12" name="s_number"
+                                               required="required" type="text"
+                                               value="{% if staff %}{{ staff.s_number }}{% endif %}">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">姓名 <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="name" class="form-control col-md-7 col-xs-12" name="s_name"
+                                               required="required" type="text"
+                                               value="{% if staff %}{{ staff.s_name }}{% endif %}">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">部门 <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select id="name" class="form-control col-md-7 col-xs-12" name="d_name"
+                                                required="required" type="text"
+                                                value="{% if staff %}{{ staff.s_name }}{% endif %}">
+                                            <option value="事务部"
+                                                    {% ifequal staff.s_name "事务部" %}selected{% endifequal %}>事务部
+                                            </option>
+                                            <option value="清洁部"
+                                                    {% ifequal staff.s_name "清洁部" %}selected{% endifequal %}>清洁部
+                                            </option>
+                                            <option value="绿化部"
+                                                    {% ifequal staff.s_name "绿化部" %}selected{% endifequal %}>绿化部
+                                            </option>
+                                            <option value="安保部"
+                                                    {% ifequal staff.s_name "安保部" %}selected{% endifequal %}>安保部
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">职务 <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select id="name" class="form-control col-md-7 col-xs-12" name="j_name"
+                                                required="required" type="text">
+                                            <option value="总经理"
+                                                    {% ifequal staff.j_name "总经理" %}selected{% endifequal %}>总经理
+                                            </option>
+                                           <option value="副经理"
+                                                    {% ifequal staff.j_name "副经理" %}selected{% endifequal %}>副经理
+                                            </option>
+                                            <option value="部长"
+                                                    {% ifequal staff.j_name "部长" %}selected{% endifequal %}>部长
+                                            </option>
+                                                 <option value="副部长"
+                                                    {% ifequal staff.j_name "副部长" %}selected{% endifequal %}>副部长
+                                            </option>
+                                              <option value="普通员工"
+                                                    {% ifequal staff.j_name "普通员工" %}selected{% endifequal %}>普通员工
+                                            </option>
+                                         <option value="普通员工"
+                                                    {% ifequal staff.j_name "兼职人员" %}selected{% endifequal %}>兼职人员
+                                            </option>
+
+
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">职务说明<span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="name" class="form-control col-md-7 col-xs-12" name="s_explan"
+                                               required="required" type="text"
+                                               value="{% if staff %}{{ staff.s_explan }}{% endif %}">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">身份证号<span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="name" class="form-control col-md-7 col-xs-12" name="s_id"
+                                               required="required" type="text"
+                                               value="{% if staff %}{{ staff.s_id }}{% endif %}">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">联系电话<span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="name" class="form-control col-md-7 col-xs-12" name="s_phone"
+                                               required="required" type="text"
+                                               value="{% if staff %}{{ staff.s_phone }}{% endif %}">
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">紧急联系人 <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="name" class="form-control col-md-7 col-xs-12" name="s_cname"
+                                               required="required" type="text"
+                                               value="{% if staff %}{{ staff.s_cname }}{% endif %}">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">紧急联系电话 <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="name" class="form-control col-md-7 col-xs-12" name="s_cphone"
+                                               required="required" type="text"
+                                               value="{% if staff %}{{ staff.s_cphone }}{% endif %}">
+                                    </div>
+                                </div>
+
+
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <a type="submit" class="btn btn-primary" href="/staff/list">返回</a>
+                                        <button id="send" type="submit" class="btn btn-success">
+                                            {% if staff %}
+                                                编辑
+                                            {% else %}
+                                                添加
+                                            {% endif %}
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ block.super }}
+    <!-- validator -->
+    <script src="/static/vendors/validator/validator.js"></script>
+{% endblock javascripts %}

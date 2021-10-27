@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 style="margin-top: 30px">订单编号：{{ id }}</h1>
+    <div class="row" style="margin-top: 20px">
+        <div class="col-sm-12">
+            <ul class="list-group">
+                {% for foo in orderDetailList %}
+                    <li class="list-group-item disabled" aria-disabled="true">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <img src="/{{ foo.goods.goods_image }}" alt="" style="width: 120px;">
+                            </div>
+                            <div class="col-sm-9">
+                                <p>{{ foo.goods.name }}</p>
+                                <p>￥{{ foo.price }}</p>
+
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+
+            </ul>
+                        <a class="btn-primary btn" style="margin-top: 10px" href="/order/list/">返回</a>
+
+
+
+        </div>
+
+    </div>
+{% endblock %}
