@@ -12,5 +12,12 @@ class HomeView(View):
         return render(request,'home.html')
 
     def post(self,request):
-        pass
+        
         return redirect("")
+class InformationView(View):
+    def get(self,request):
+        return render(request,'information.html')
+
+class MemebersView(View):
+    def get(self,request):
+        return render(request,'memeber.html')
