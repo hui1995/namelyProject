@@ -21,3 +21,12 @@ class InformationView(View):
 class MemebersView(View):
     def get(self,request):
         return render(request,'memeber.html')
+
+
+class LoginView(View):
+    def get(self,request):
+        return render(request,'login.html')
+
+class MessageView(View):
+    def get(self,request):
+        return render(request,'message.html')
