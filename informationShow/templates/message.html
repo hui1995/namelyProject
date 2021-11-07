@@ -18,57 +18,39 @@ Leave your comment here!
 
 
 </div>
+
 </div>
 
 <div style="width:100%;background:#587387;border:1px solid #587387;margin:0 auto;margin-top:-40px">
 
 
 <div style="width:100%;background:#3A5C75;border:1px solid #3A5C75;margin:0 auto;margin-top:-10px;margin-left:10px;" >
-<div class="row" style="margin-top:100px">
-<div class="col-sm-1"></div>
-<div class="col-sm-10">
-<div style="width:100%;height:90px;background:white;color:#587387">
-    <div style="margin-left:15px;padding-top:5px">
-    <u><h4 style>Account Name:</h4></u>
-    
-    </div>
-<p style="margin-left:40px;margin-top:10px;font-size:18px">comment content.........</p>
 
-</div>
+<div style="width:100%%;height:80px"></div>
 
 
-</div>
-
-</div>
-
+{% for foo in commentList %}
 
 <div class="row" style="margin-top:20px">
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
 <div style="width:100%;height:90px;background:white;color:#587387">
     <div style="margin-left:15px;padding-top:5px">
-    <u><h4 style>Account Name:</h4></u>
+    <u><h4 >{{foo.user.username}}:</h4></u>
     
     </div>
-<p style="margin-left:40px;margin-top:10px;font-size:18px">comment content.........</p>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-<div class="row" style="margin-top:20px">
-<div class="col-sm-1"></div>
+    <div class="row">
 <div class="col-sm-10">
-<div style="width:100%;height:90px;background:white;color:#587387">
-    <div style="margin-left:15px;padding-top:5px">
-    <u><h4 style>Account Name:</h4></u>
-    
+        <p style="margin-left:40px;margin-top:10px;font-size:18px">{{foo.content}}</p>
     </div>
-<p style="margin-left:40px;margin-top:10px;font-size:18px">comment content.........</p>
+    <div class="col-sm-2">
+  {% ifequal request.user.userType 1 %}
+    <a href="/del/message/?id={{foo.id}}" ><button value="send" type="submit" style="background:#587387;color:white;">Delete</button></a>
+{% endifequal %}
+    </div>
+    </div>
+
+
 
 </div>
 
@@ -76,22 +58,29 @@ Leave your comment here!
 </div>
 
 </div>
+
+{% endfor %}
+
+
+
+
+
 
 <div class="row" style="margin-top:30px">
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
 
-<div class="row" style="padding-bottom:100px">
+<form method="post"  class="row" style="padding-bottom:100px">
+{% csrf_token %}
 <div class="col-sm-11">
-<input type="text" style="width:100%">
+<input type="text" style="width:100%" name="content">
 </div>
 
 <div class="col-sm-1" >
-<button style="background:#587387;color:white;">
-send
-</button></div>
+<input value="send" type="submit" style="background:#587387;color:white;">
+</input></div>
 
-</div>
+</form>
 
 </div>
 

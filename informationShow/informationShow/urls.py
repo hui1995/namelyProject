@@ -16,13 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from myApp.views import HomeView,InformationView,MemebersView,LoginView,MessageView
+from myApp.views import HomeView,InformationView,MemebersView,LoginView,MessageView,LogoutView,DelMessageView
 
 urlpatterns = [
   path('admin/', admin.site.urls),
     path('information/',InformationView.as_view()),  
     path('memebers/',MemebersView.as_view()),
+      path('del/message/',DelMessageView.as_view()),
+
     path('login/',LoginView.as_view()),
     path('message/',MessageView.as_view()),
+    path('logout/',LogoutView.as_view()),
   path('',HomeView.as_view()),  
 ]

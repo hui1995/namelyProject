@@ -60,7 +60,14 @@
                         <li> <a href="/information/">Information</a></li>
                         <li> <a href="/message/">Comments</a></li>
                         <li> <a href="/memebers/">Memebers</a></li>
-                        <li> <a href="/login/">Login or Register</a></li>
+                        <li style="color:white"> 
+                        {% if request.user.is_authenticated %}
+                            {{request.user.username}}<a href="/logout/" style="margin-left:10px">Logout</a></li>
+
+                        {% else %}
+                            <a href="/login/">Login or Register</a></li>
+
+                        {% endif %}
                         </ul>
                         </div>
 
