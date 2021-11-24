@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <h1 style="margin-top: 40px">{{ title }}</h1>
+
+    <div class="row">
+        {% for foo in page1.object_list %}
+            <div class="col-sm-4">
+                <div class="card" style="width: 18rem;margin: 0 auto;margin-top: 20px">
+                    <img src="/{{ foo.goods_image }}" class="card-img-top" alt="..." style="height: 260px;width: 100%;margin: 0 auto">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ foo.name }}</h5>
+                        <p class="card-text">
+                            ￥{{ foo.price }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;已售：{{ foo.sold }}</p>
+                        <a href="/goods/detail/?id={{ foo.id }}" class="btn btn-primary">查看详情</a>
+                    </div>
+                </div>
+
+            </div>
+
+
+        {% endfor %}
+
+    </div>
+    <div class="row" style="margin-top: 30px;margin-bottom: 30px">
+        <div class="col-sm-12">
+            <nav aria-label="...">
+                <ul class="pagination" style="margin: 0 auto;margin-left: 50px">
+                    {% if page1.has_previous %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="?{%if keyword %}keyword={{ keyword }}{% else %}cate={{ cate }}{% endif %}&page={{ page1.previous_page_number }}"
+                               tabindex="-1"
+                               aria-disabled="true">Previous</a>
+                        </li>
+                    {% endif %}
+
+                    {% for num in paginator.page_range %}
+                        {% if num == page1.number %}
+
+
+                            <li class="page-item active" aria-current="page"><a class="page-link"
+                                    href="?{%if keyword %}keyword={{ keyword }}{% else %}cate={{ cate }}{% endif %}&page={{ num }}">{{ num }}</a></li>
+                        {% else %}
+
+                            <li class="page-item"><a class="page-link"
+                                                     href="?{%if keyword %}keyword={{ keyword }}{% else %}cate={{ cate }}{% endif %}&page={{ num }}">{{ num }}</a></li>
+
+                        {% endif %}
+                    {% endfor %}
+
+
+
+                    {% if page1.has_next %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="?{%if keyword %}keyword={{ keyword }}{% else %}cate={{ cate }}{% endif %}&page={{ page1.next_page_number }}">Next</a>
+                        </li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+
+{% endblock %}

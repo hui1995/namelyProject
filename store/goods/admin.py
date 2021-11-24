@@ -1,5 +1,5 @@
 from django.contrib import admin
-from goods.models import Goods,Order,OrderDetail,Message
+from goods.models import Goods,Order,OrderDetail
 # Register your models here.
 
 class GoodsAdmin(admin.ModelAdmin):
@@ -12,9 +12,6 @@ class OrderDetailAdmin(admin.ModelAdmin):
     list_display = ('id','goods','order','price')
 
 
-class MessageAdmin(admin.ModelAdmin):
-    list_display = ('goods','user','message','create_date')
 admin.site.register(Goods,GoodsAdmin)
 admin.site.register(Order,OrderAdmin)
 admin.site.register(OrderDetail,OrderDetailAdmin)
-admin.site.register(Message,MessageAdmin)

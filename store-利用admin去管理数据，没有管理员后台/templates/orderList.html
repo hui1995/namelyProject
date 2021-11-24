@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 style="margin-top: 30px">我的订单</h1>
+    <div class="row" style="margin-top: 20px">
+        <div class="col-sm-12">
+            <ul class="list-group">
+                {% for foo in order %}
+                    <li class="list-group-item" aria-disabled="true">
+                        <div class="row">
+
+                            <div class="col-sm-4">
+                                <p>订单编号：{{ foo.id }}</p>
+                                <p>￥{{ foo.total_price }}</p>
+
+                            </div>
+                            <div class="col-sm-2">
+                                {% ifequal foo.status 0 %}
+                                    待发货
+                                {% else %}
+                                    {% ifequal foo.status 1 %}
+                                        已发货
+                                    {% else %}
+                                        {% ifequal foo.status 2 %}
+                                            已收货
+                                        {% else %}
+                                            {% ifequal foo.status 3 %}
+                                                申请退货
+                                            {% else %}
+                                                {% ifequal foo.status 4 %}
+                                                    已退货
+                                                {% else %}
+                                                {% endifequal %}
+                                            {% endifequal %}
+                                        {% endifequal %}
+                                    {% endifequal %}
+                                {% endifequal %}
+
+                            </div>
+                            <div class="col-sm-4">
+                                <p>
+                                    <a class="btn-primary btn" href="/order/detail/list/?id={{ foo.id }}">查看详情</a>
+                                    {% ifequal foo.status 1 %}
+                                        <a class="btn-primary btn" href="/order/status/?id={{ foo.id }}">收货</a>
+                                        <a class="btn-primary btn" href="/order/del/?id={{ foo.id }}">退货</a>
+
+                                    {% else %}
+                                              {% ifequal foo.status 0 %}
+                                        <a class="btn-primary btn" href="/order/del/?id={{ foo.id }}">退货</a>
+
+                                    {% else %}
+
+
+                                    {% endifequal %}
+
+                                    {% endifequal %}
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+
+
+        </div>
+
+    </div>
+{% endblock %}

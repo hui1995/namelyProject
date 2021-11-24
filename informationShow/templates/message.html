@@ -41,8 +41,8 @@ Leave your comment here!
     </div>
     <div class="row">
 <div class="col-sm-10">
-        <p style="margin-left:40px;margin-top:10px;font-size:18px">{{foo.content}}</p>
-    </div>
+        <p style="margin-left:40px;margin-top:10px;font-size:18px">}</p>
+    </div>{{foo.content}
     <div class="col-sm-2">
   {% ifequal request.user.userType 1 %}
     <a href="/del/message/?id={{foo.id}}" ><button value="send" type="submit" style="background:#587387;color:white;">Delete</button></a>

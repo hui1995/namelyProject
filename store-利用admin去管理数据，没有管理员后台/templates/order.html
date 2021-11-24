@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 style="margin-top: 30px">确认订单</h1>
+    {% if msg %}
+<div class="row">
+<div class="col-sm-12" style="margin-top: 100px;text-align: center">
+    <h1>{{ msg }}</h1>
+</div>
+</div>
+
+        {% else %}
+            <div class="row" style="margin-top: 20px">
+        <div class="col-sm-12">
+            <ul class="list-group">
+                {% for foo in goods %}
+                    <li class="list-group-item disabled" aria-disabled="true">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <img src="/{{ foo.goods_image }}" alt="" style="width: 120px;">
+                            </div>
+                            <div class="col-sm-9">
+                                <p>{{ foo.name }}</p>
+                                <p>￥{{ foo.price }}</p>
+
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            <h3 style="margin-top: 20px">总价： {{ goods.0.price }}</h3>
+            </ul>
+
+
+        </div>
+
+    </div>
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="row" style="margin-top: 20px">
+            <div class="col-sm-2">选择收货地址:
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button class="btn-primary btn" type="submit" style="margin-top: 20px">点击下单</button>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <select class="form-select" aria-label="Default select example" name="address">
+                    {% for foo in addressList %}
+                        <option value="{{ foo.id }}">{{ foo.username }}-{{ foo.phone }}-{{ foo.address }}</option>
+
+                    {% endfor %}
+
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <a class="btn btn-primary" href="/goods/address/?id={{ id }}">添加收货地址</a>
+            </div>
+        </div>
+        </div>
+
+    </form>
+    {% endif %}
+
+{% endblock %}

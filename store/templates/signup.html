@@ -1,58 +1,109 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="row" style="margin-top: 100px">
-        <div class="col-sm-4"></div>
-        <div class="col-sm-4">
-            <div class="card text-center">
-                <div class="card-header">
-                    注册
+<div class="passport-signup-container">
+    <div class="panel panel-default signup-panel">
+      <div class="panel-heading clearfix">
+          注册账号
+          <!-- <a class="btn btn-danger btn-xs pull-right" href="/passport-login-https:_x__x_shop_d_haojue_d_com_x_list_d_html_w_cat_id_e_8.html">立即登录&raquo;</a> -->
+      </div>
+      <div class="panel-body">
+          <form id="member_signup_form" class="form-horizontal" action="/passport-create.html" method="post">
+              <!-- 登陆后跳转地址 -->
+              <input type="hidden" name="forward" value="https://shop.haojue.com/list.html?cat_id=8">
+              <div class="form-group">
+                  <!-- <label for="input_login_name" class="col-md-2 control-label">登录账号<span class="text-danger">*</span></label> -->
+                  <div class="col-md-20 login-input">
+
+                    <input type="text" required="true" style="border-bottom:1px solid #E0DFE0"  autocomplete='off' name="pam_account[login_name]" class="form-control" id="input_login_name" placeholder="请输入手机号">
+                  </div>
+              </div>
+              <div class="form-group">
+                  <!-- <label for="input_login_password" class="col-md-2 control-label">登录密码<span class="text-danger">*</span></label> -->
+                  <div class="col-md-20 login-input">
+                    <input type="password" required="true" style="border-bottom:1px solid #E0DFE0" name="pam_account[login_password]" class="form-control" id="input_login_password" placeholder="请输入密码，最小长度为6个字符">
+                  </div>
+              </div>
+              <!-- <div class="form-group">
+                  <label for="input_psw_confirm" class="col-md-2 control-label">确认密码<span class="text-danger">*</span></label>
+                  <div class="col-md-5">
+
+                    <input type="password" required="true" name="pam_account[psw_confirm]" class="form-control" id="input_psw_confirm" placeholder="再次输入登录密码">
+                  </div>
+              </div> -->
+              <!-- <hr> -->
+                            <div class="form-group form-position">
+                  <!-- <label for="input_vcode" class="col-md-2 control-label">验证码<span class="text-danger">*</span></label> -->
+                  <div class="col-md-20 login-input">
+                    <input type="text" required="true" name="vcode" style="border-bottom:1px solid #E0DFE0" class="form-control" id="input_vcode" placeholder="请输入短信验证码">
+                  </div>
+                  <div class="col-md-2 login-sms-btn">
+                      <!-- <div class="local-vcode" style="display:none;">
+                          <img src="/vcode-index-passport.html" alt="验证码" />
+                          <button type="button" class="btn btn-link btn-sm" onclick="$(this).prev().prop('src',$(this).attr('data-src')+'?'+new Date().getTime())" data-src="/vcode-index-passport.html" >更换验证码</button>
+                      </div> -->
+                      <div class="mobile-vcode" >
+                          <button type="button" data-loading-text="正在发送..." class="btn">发送验证码</button>
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group">
+                    <div class="col-md-20 login-btn-register">
+                      <button type="submit" data-loading-text="正在提交..." class="btn ">立即注册</button>
+                    </div>
                 </div>
-                <form class="card-body" action="" method="post">
-                                {% csrf_token %}
-
-                    {% if msg %}
-                        <div class="alert alert-primary" role="alert">
-                            {{ msg }}
-                        </div>
-                    {% endif %}
-
-                    <div class="mb-3 row">
-                        <label for="staticEmail" class="col-sm-4 col-form-label">邮箱</label>
-                        <div class="col-sm-8">
-                            <input type="email" class="form-control" id="staticEmail"
-                                   name="email">
-                        </div>
+             <div class="form-group">
+                  <div class="col-md-20 login-register-agree">
+                    <div class="checkbox col-md-19">
+                      <label>
+                        <input  type="checkbox" checked name="" value="1">已阅读并同意豪爵官方商城
+                      </label>
+                      <a href="/index.php/p-20.html" style="color:#E60012">《用户协议》</a>和<a href="/index.php/p-25.html" style="color:#E60012">《隐私政策》</a>   
                     </div>
+                  </div>
+				  
+				      <div class="signup-back"> 
+                 <a class=" btn-xs pull-right" href="/passport-login-https:_x__x_shop_d_haojue_d_com_x_list_d_html_w_cat_id_e_8.html">返回登录</a>
+              </div>
+              </div>
+          </form>
+      </div>
 
-                    <div class="mb-3 row">
-                        <label for="staticEmail" class="col-sm-4 col-form-label">用户名</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="staticEmail"
-                                   name="username">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="inputPassword" class="col-sm-4 col-form-label">密码</label>
-                        <div class="col-sm-8">
-                            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="请输入密码">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="inputPassword" class="col-sm-4 col-form-label">密码</label>
-                        <div class="col-sm-8">
-                            <input type="password" class="form-control" id="inputPassword" placeholder="请确认密码" name="password2">
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <button type="submit" class="btn btn-primary mb-3">注册</button>
-
-                    </div>
-                </form>
-
-            </div>
-        </div>
-        <div class="col-sm-2"></div>
     </div>
+    <div class="modal fade" id="img_vcode_modal" tabindex="-1" role="dialog" aria-labelledby="图形验证码">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">图形验证码</h4>
+                </div>
+                <form>
+
+                </form>
+                <div class="modal-body row">
+                    <div class="form-group">
+                        <div class="col-xs-7 col-md-7">
+                            <input style="display:none">
+                            <input type="text" value="" required="true" id="img_vcode" class="form-control input-lg" placeholder="请输入右边的验证码" >
+                        </div>
+                        <div class="col-xs-5 col-md-5">
+                            <div id="img_vcode_block">
+                                <img src="/vcode-index-passport.html" alt="验证码" />
+                            </div>
+                            <div >
+                                <a id="vcode_image" href="javascript:;" onclick="$('#img_vcode_block').find('img').prop('src',$(this).attr('data-src')+'?'+new Date().getTime())" data-src="/vcode-index-passport.html" >更换验证码</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-xs-12">
+                        <button type="submit" id="img_vcode_submit" class="btn btn-lg btn-block btn-primary" data-loading-text="正在提交...">
+                            确认
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 
 {% endblock %}

@@ -12,6 +12,8 @@ def loginUser(request):
 
         if user:
             login(request, user)  # 验证成功之后登录
+            if user.userType==2:
+                return redirect("/admin")
             return redirect("/index/")
         else:
             msg = "账号或者密码不正确"
@@ -23,6 +25,7 @@ def signup(request):
         username = request.POST.get("username")
         password = request.POST.get("password")
         password2 = request.POST.get("password2")
+        userType = request.POST.get("userType")
         if len(username)<=3:
             msg="用户名不能低于3位"
             return render(request, 'signup.html', locals())
@@ -34,7 +37,7 @@ def signup(request):
             return render(request, 'signup.html', locals())
         email = request.POST.get("email")
         try:
-            user=User.objects.create_user(username,email,password)
+            user=User.objects.create_user(username,email,password,userType=userType,money=0)
             return redirect("/login/")
         except Exception as e:
             print(e)

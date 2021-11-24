@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from goods.models import Goods, CollectGoods, Cart, Order, OrderDetail, Address,Message
+from goods.models import Goods, CollectGoods, Cart, Order, OrderDetail, Address
 # Create your views here.
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -49,8 +49,6 @@ def searchGoodList(request):
 def goodsDetail(request):
     id = request.GET.get("id")
     if request.method=="POST":
-        message=request.POST.get("message")
-        Message.objects.create(goods_id=id,user_id=request.user.id,message=message)
         return redirect("/goods/detail/?id="+id)
     goods = Goods.objects.get(id=id)
     collectGoods = CollectGoods.objects.filter(goods_id=id).filter(user_id=request.user.id).first()

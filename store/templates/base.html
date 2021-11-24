@@ -1,91 +1,223 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-
-    <title>好食指商城</title>
+    <meta charset="utf-8" />
+    <title>XX商城</title>
+    <meta content="XX商城" name="keywords" />
+    <meta content="XX商城" name="description" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link href="https://cnd.haojue.com/public/stylesheets/bootstrap.min.css?v00bf" rel="stylesheet" type="text/css" />
+    <script src="https://cnd.haojue.com/public/javascripts/jquery.min.js?v00bf" type="text/javascript" charset="utf-8">
+    </script>
+    <script src="https://cnd.haojue.com/public/javascripts/jquery.cookie.js?v00bf" type="text/javascript"
+        charset="utf-8"></script>
+    <script src="https://cnd.haojue.com/public/javascripts/bootstrap.min.js?v00bf" type="text/javascript"
+        charset="utf-8"></script>
+    <!--site header common-->
+    <!--[if lt IE 9]>
+{include file=}
+<script src="https://shop.haojue.com/public/javascripts/html5fix.js?v00bf" res_url="https://shop.haojue.com/public" type="text/javascript" charset="utf-8" ></script>
+<link href="https://cnd.haojue.com/public/misc/respond_proxy/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
+<link href="https://shop.haojue.com/public/misc/respond_proxy/respond.proxy.gif?v00bf" id="respond-redirect" rel="respond-redirect" />
+<script src="https://shop.haojue.com/public/misc/respond_proxy/respond.proxy.js?v00bf"></script>
+<![endif]-->
+    <link rel="stylesheet" href="https://cnd.haojue.com/themes/pc/haojue/statics/theme.css?v00bf">
+    <link rel="stylesheet" href="https://cnd.haojue.com/themes/pc/haojue/statics/list.css?v00bf">
+    <link rel="stylesheet" href="https://cnd.haojue.com/themes/pc/haojue/statics/login.css?v00bf">
+    <!-- <script>
+	(function(){
+		var from_vshopid = $.cookie('from_vshopid');
+		var GetQuery = function(name){
+		     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		     var r = window.location.search.substr(1).match(reg);
+		     if(r!=null)return  unescape(r[2]); return null;
+		}
+		$.get('/openapi/vshop/isv',function(res){
+			if (res.result == 'failure' && res.msg == '非微店店主') {
+				if (from_vshopid) return;
+				var vsid = GetQuery('vsid');
+				if(vsid){
+					$.cookie('from_vshopid',vsid,{expires:300});
+				}
+			}else{
+				//微店店主身份,清除 cookie
+				$.cookie('from_vshopid',null);
+			}
+		})
+	})()
+</script> -->
 </head>
+
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">好食指商城</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/index">首页</a>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        热卖食品
+    <header>
+        <div class="container">
+            <nav class="navbar navbar-inverse">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                        <img src="https://cnd.haojue.com/public/images/67/6b/48/f26f3b97feeab2ef2a75d6f2c90861af181cc629.jpg?14161_OW68_OH68"
+                            height="52">
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/goods/list/?cate=new">最新榜单</a></li>
-                        <li><a class="dropdown-item" href="/goods/list/?cate=hot">热卖排行</a></li>
 
-                    </ul>
-                </li>
-                {% if request.user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            个人中心
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/cart/list/">我的购物车</a></li>
-                            <li><a class="dropdown-item" href="/collect/list/">我的收藏</a></li>
-                            <li><a class="dropdown-item" href="/order/list/">我的订单</a></li>
+                    <div class="navbar-solid"></div>
+                    <a href="/">
+                        <div class="navbar-logo-text">
+                            <div class="navbar-text-line1">XX商城</div>
+            
+                        </div>
+                    </a>
+                </div>
+                <ul class="nav navbar-nav navbar-nav-content">
+                    <li onclick="changeNav(1)" id="li1" class="navli"><a href="/list.html?cat_id=1">服装</a></li>
+                    <li onclick="changeNav(2)" id="li2" class="navli"><a href="/list.html?cat_id=8">生鲜</a></li>
+                    <li onclick="changeNav(3)" id="li3" class="navli"><a href="/list.html?cat_id=17">电子产品</a></li>
+                    <li onclick="changeNav(4)" id="li4" class="navli"><a
+                            href="/etenance-editTenance-drive.html">玩具</a></li>
 
-                            <li><a class="dropdown-item" href="/password/">修改密码</a></li>
-                            <li><a class="dropdown-item" href="/logout/">退出登录</a></li>
+                </ul>
+                <ul class="nav navbar-nav top-tools navbar-right">
+                    <li class="nav-search" style="position: relative;">
+                        <input type="text" id="input_keyword" placeholder="请输入搜索内容" />
+                        <a href="javascript:;" id="search_icon"
+                            style="position: absolute; top: 30px; left: 145px; width: 20px; height: 30px;margin: 0;"></a>
+                    </li>
+
+                    {% if request.user.is_authenticated %}
+
+                    {% ifequal request.user.userType 0  %}
+                    <li class="is-login" style="margin-left:15px">
+                        <ul class="is-login-menu">
+                            <a href="/my.html"><img src="/themes/pc/haojue/images/1.png?v00bf"
+                                    style="width: 20px;">我的订单</a>
+                            <a href="/my-favorite.html"><img src="/themes/pc/haojue/images/3.png?v00bf"
+                                    style="width: 20px;">我的收藏</a>
+                            <a href="/my-favorite.html"><img src="/themes/pc/haojue/images/3.png?v00bf"
+                                    style="width: 20px;">收货地址</a>
+                            <li><a href="/passport-logout.html"><img src="/themes/pc/haojue/images/5.png?v00bf"
+                                        style="width: 20px;">退出登录</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li class="is-login" style="margin-left:15px">
+                        <ul class="is-login-menu">
+                            <a href="/my.html"><img src="/themes/pc/haojue/images/1.png?v00bf"
+                                    style="width: 20px;">发布商品</a>
+                            <a href="/my-favorite.html"><img src="/themes/pc/haojue/images/3.png?v00bf"
+                                    style="width: 20px;">商品管理</a>
+                            <a href="/my-favorite.html"><img src="/themes/pc/haojue/images/3.png?v00bf"
+                                    style="width: 20px;">订单管理</a>
+                            <a href="/my-favorite.html"><img src="/themes/pc/haojue/images/3.png?v00bf"
+                                    style="width: 20px;">提现管理</a>
+                            <li><a href="/passport-logout.html"><img src="/themes/pc/haojue/images/5.png?v00bf"
+                                        style="width: 20px;">退出登录</a></li>
                         </ul>
                     </li>
 
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="/login">登陆</a>
+                    {% endifequal %}
+
+
+
+
+
+                    {% else %}
+                    <li class="is-unlogin" style="margin-left:15px">
+                        <ul class="unlogin-menu">
+                            <a href="/passport-login.html"><img src="/themes/pc/haojue/images/login.png?v00bf"
+                                    style="width: 30px;">登录</a>
+                            <a href="/passport-signup.html"><img src="/themes/pc/haojue/images/regist.png?v00bf"
+                                    style="width: 30px;">注册</a>
+                        </ul>
                     </li>
-                    <li>
-                        <a class="nav-link " aria-current="page" href="/signup">注册</a>
+                    {% endif %}
+                    <li class="dropdown mini-cart">
+                        <a class="dropdown-toggle" style="padding: 15px 0 0 15px;" href="/cart.html">
+                            <img class="cart-icon" src="/themes/pc/haojue/images/cart.png?v00bf" alt="">
+
+                            <span class="text-danger cart-count hidden"></span>
+                            <!-- <span class="caret"></span> -->
+                        </a>
+                        <ul class="dropdown-menu mc-content" role="menu" aria-labelledby="member_menu">
+                            <li class="mcc-bottom text-right">
+                                <button onclick="location='/cart.html'" type="button"
+                                    class="btn btn-sm btn-danger btn-gocart" name="button">查看我的购物车</button>
+                            </li>
+                        </ul>
 
                     </li>
+                </ul>
 
-                {% endif %}
-            </ul>
-            <form class="d-flex" action="/goods/search/">
-                <input class="form-control me-2" type="search" placeholder="Search" name="keyword" aria-label="Search"
-                       value="{% if keyword %}{{ keyword }}{% endif %} ">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+            </nav>
         </div>
-    </div>
-</nav>
-<div class="container">
-    {% block content %}
-    {% endblock %}
-    <!-- Content here -->
-</div>
-<!-- Option 1: Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-        crossorigin="anonymous"></script>
+    </header>
 
-<!-- Option 2: Separate Popper and Bootstrap JS -->
-<!--
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
--->
+    <script>
+        var changeNav = function (e) {
+            document.getElementsByClassName('active navli')[0].classList.remove('active')
+            document.getElementById('li' + e).classList.add('active')
+        };
+    </script>
+
+    <script type="text/template" id="minicart_item_tpl">
+        <li class="mc-item">
+        <div class="row">
+            <div class="col-xs-2">
+                <a href='{item_url}'><img class="img-responsive" src="{image_url}"></a>
+            </div>
+            <div class="col-xs-6">
+                <span>{name}</span>
+                <p class="spec-info text-muted">{spec_info}</p>
+            </div>
+            <div class="col-xs-4">
+                <span class="text-danger text-price">
+                    <small>￥</small>{buy_price}
+                </span>
+                <a href="{remove_url}" class='cart-remove btn btn-xs btn-default'>删除</a>
+            </div>
+        </div>
+    </li>
+</script>
+
+    <div class="container main-container">
+
+        {% block content %}
+
+        {% endblock content %}
+
+        <!--<script> 
+    $(function(){
+        console.log({"1":{"cat_id":"1","parent_id":"0","cat_path":"1","has_children":"true","cat_name":"\u4e70\u65b0\u8f66","h5_url":"","wxapp_url":"","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"1","addon":{"icon":"b26fc47e89ff0e5a76aa1c1b500adb1d","visible":"true"},"last_modify":"1633052104","disabled":"false","seo_info":{"seo_title":"\u4e70\u65b0\u8f66-\u8c6a\u7235\u5b98\u65b9\u5546\u57ce","seo_keywords":"","seo_description":""},"children":{"25":{"cat_id":"25","parent_id":"1","cat_path":"1,25","has_children":"false","cat_name":"XCR300","h5_url":"\/pages\/gallery\/gallery?cat_id=1","wxapp_url":"\/pages\/gallery\/gallery?cat_id=1","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"1","addon":{"icon":"286c996f83e3e6b41b3cf5f5bc9c3285","visible":"true"},"last_modify":"1633052104","disabled":"false","seo_info":{"seo_title":"","seo_keywords":"","seo_description":""}},"2":{"cat_id":"2","parent_id":"1","cat_path":"1,2","has_children":"false","cat_name":"DR300","h5_url":"\/pages\/gallery\/gallery?cat_id=1","wxapp_url":"\/pages\/gallery\/gallery?cat_id=1","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"2","addon":{"icon":"75f6123060affc8396e07f47ce8a04f1","visible":"true"},"last_modify":"1633048509","disabled":"false","seo_info":{"seo_title":"","seo_keywords":"","seo_description":""}},"24":{"cat_id":"24","parent_id":"1","cat_path":"1,24","has_children":"false","cat_name":"DR250","h5_url":"","wxapp_url":"","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"3","addon":{"icon":"","visible":"true"},"last_modify":"1633048509","disabled":"false","seo_info":{"seo_title":"","seo_keywords":"","seo_description":""}},"3":{"cat_id":"3","parent_id":"1","cat_path":"1,3","has_children":"false","cat_name":"DL250","h5_url":"","wxapp_url":"","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"4","addon":{"visible":"true"},"last_modify":"1633048509","disabled":"false","seo_info":null},"4":{"cat_id":"4","parent_id":"1","cat_path":"1,4","has_children":"false","cat_name":"GSX250R","h5_url":"","wxapp_url":"","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"5","addon":{"visible":"true"},"last_modify":"1633048509","disabled":"false","seo_info":null},"5":{"cat_id":"5","parent_id":"1","cat_path":"1,5","has_children":"false","cat_name":"GW250","h5_url":"","wxapp_url":"","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"6","addon":{"visible":"true"},"last_modify":"1633048509","disabled":"false","seo_info":null},"6":{"cat_id":"6","parent_id":"1","cat_path":"1,6","has_children":"false","cat_name":"NK150","h5_url":"","wxapp_url":"","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"7","addon":{"visible":"true"},"last_modify":"1633048509","disabled":"false","seo_info":null},"7":{"cat_id":"7","parent_id":"1","cat_path":"1,7","has_children":"false","cat_name":"EAGLE","h5_url":"","wxapp_url":"","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"8","addon":{"visible":"false"},"last_modify":"1633048509","disabled":"false","seo_info":{"seo_title":"","seo_keywords":"","seo_description":""}}},"selected":true},"8":{"cat_id":"8","parent_id":"0","cat_path":"8","has_children":"true","cat_name":"\u539f\u5382\u90e8\u54c1","h5_url":"","wxapp_url":"","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"2","addon":{"icon":"e234b9f0aafb95ad287b433ea507086e","visible":"true"},"last_modify":"1626564147","disabled":"false","seo_info":{"seo_title":"\u539f\u5382\u90e8\u54c1-\u8c6a\u7235\u5b98\u65b9\u5546\u57ce","seo_keywords":"","seo_description":""},"children":{"9":{"cat_id":"9","parent_id":"8","cat_path":"8,9","has_children":"false","cat_name":"\u5934\u76d4\u7c7b","h5_url":"","wxapp_url":"","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"0","addon":{"icon":"896ad489e389e4e524f5f941c1b13e8d","visible":"true"},"last_modify":"1617718376","disabled":"false","seo_info":{"seo_title":"","seo_keywords":"","seo_description":""}},"10":{"cat_id":"10","parent_id":"8","cat_path":"8,10","has_children":"false","cat_name":"\u6cb9\u54c1\u7c7b","h5_url":"","wxapp_url":"","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"0","addon":{"icon":"","visible":"true"},"last_modify":"1626564147","disabled":"false","seo_info":{"seo_title":"","seo_keywords":"","seo_description":""}},"11":{"cat_id":"11","parent_id":"8","cat_path":"8,11","has_children":"false","cat_name":"\u8f6e\u80ce\u7c7b","h5_url":"","wxapp_url":"","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"0","addon":{"icon":"","visible":"true"},"last_modify":"1617718376","disabled":"false","seo_info":{"seo_title":"","seo_keywords":"","seo_description":""}},"12":{"cat_id":"12","parent_id":"8","cat_path":"8,12","has_children":"false","cat_name":"\u9632\u76d7\u5668\u7c7b","h5_url":"","wxapp_url":"","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"0","addon":{"icon":"","visible":"true"},"last_modify":"1617718376","disabled":"false","seo_info":{"seo_title":"","seo_keywords":"","seo_description":""}},"13":{"cat_id":"13","parent_id":"8","cat_path":"8,13","has_children":"false","cat_name":"\u5c3e\u7bb1\u7c7b","h5_url":"","wxapp_url":"","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"0","addon":{"icon":"","visible":"false"},"last_modify":"1617718376","disabled":"false","seo_info":{"seo_title":"","seo_keywords":"","seo_description":""}},"14":{"cat_id":"14","parent_id":"8","cat_path":"8,14","has_children":"false","cat_name":"\u5145\u7535\u5668\u7c7b","h5_url":"","wxapp_url":"","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"0","addon":{"icon":"","visible":"true"},"last_modify":"1617718376","disabled":"false","seo_info":{"seo_title":"","seo_keywords":"","seo_description":""}},"15":{"cat_id":"15","parent_id":"8","cat_path":"8,15","has_children":"false","cat_name":"\u6613\u635f\u4ef6","h5_url":"","wxapp_url":"","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"0","addon":{"icon":"","visible":"true"},"last_modify":"1617718376","disabled":"false","seo_info":{"seo_title":"","seo_keywords":"","seo_description":""}},"16":{"cat_id":"16","parent_id":"8","cat_path":"8,16","has_children":"false","cat_name":"\u9644\u4ef6\u7c7b","h5_url":"","wxapp_url":"","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"0","addon":{"icon":"","visible":"true"},"last_modify":"1617718376","disabled":"false","seo_info":{"seo_title":"","seo_keywords":"","seo_description":""}}}},"17":{"cat_id":"17","parent_id":"0","cat_path":"17","has_children":"true","cat_name":"\u9644\u52a0\u7528\u54c1","h5_url":"","wxapp_url":"","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"3","addon":{"icon":"ef4771fdca43e2242b3887eb1b0afc47","visible":"true"},"last_modify":"1625815594","disabled":"false","seo_info":{"seo_title":"","seo_keywords":"","seo_description":""},"children":{"18":{"cat_id":"18","parent_id":"17","cat_path":"17,18","has_children":"false","cat_name":"\u9a91\u884c\u88c5\u5907","h5_url":"","wxapp_url":"","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"0","addon":{"icon":"7538f27b7d70cd0bd548b29dd7239423","visible":"true"},"last_modify":"1625815594","disabled":"false","seo_info":{"seo_title":"","seo_keywords":"","seo_description":""}},"22":{"cat_id":"22","parent_id":"17","cat_path":"17,22","has_children":"false","cat_name":"\u6587\u5316\u7528\u54c1","h5_url":"","wxapp_url":"","gallery_setting":{"site_template":"list-default.html","mobile_template":"list-default.html"},"p_order":"4","addon":{"icon":"4ccda19633a006ea54fb597752765792","visible":"true"},"last_modify":"1625815573","disabled":"false","seo_info":{"seo_title":"","seo_keywords":"","seo_description":""}}}}});
+        $('#input_keyword').on('keyup',function(){
+            var keyword = $.trim($(this).val());
+            if(keyword ==''){
+                return ;
+            }
+            $.get('/index.php/openapi/search/goods_auto/keyword/'+ keyword,function(res){
+                if(res.result=='success'){
+                    console.log(res.data);
+                }else{
+                    alert(res.msg);
+                }
+            },'json')
+        });
+    });
+</script>-->
+    </div>
+    <style type="text/css">
+        .footer .col-links dd {
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        .footer .col-links {
+            width: 12%;
+        }
+
+        .footer .col-links-last {
+            margin-left: 9%;
+            width: 28%;
+        }
+    </style>
+
 </body>
+
 </html>
