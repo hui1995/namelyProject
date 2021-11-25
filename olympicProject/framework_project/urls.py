@@ -23,4 +23,7 @@ urlpatterns = [
 
     # The home page
     path('', views.index, name='index'),
+    path('search/', views.search, name='search'),
+    path('search2/', views.search2, name='search'),
+
 ]

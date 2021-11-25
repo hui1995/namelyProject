@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8"> 
+   <title>Search</title>
+   <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+   <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+   <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+   <div class="row" style="margin-top: 100px;">
+     <div class="col-sm-1"></div>
+     <div class="col-sm-10" style="text-align: center;">
+
+      <form class="form-inline" role="form" method="get" action="">
+         {% csrf_token %}
+    
+         <div class="form-group">
+           <input type="text" name="city" class="form-control" id="name"  value="{% if city %}{{city}}{% endif %}" placeholder="city">
+         </div>
+         <div class="form-group">
+          <input type="text" name="year" class="form-control" id="name"  value="{% if year %}{{year}}{% endif %}" placeholder="year">
+        </div>
+        <div class="form-group">
+          <input type="text" name="athlete" class="form-control" id="name"  value="{% if athlete %}{{athlete}}{% endif %}" placeholder="athlete">
+        </div>
+        <div class="form-group">
+          <input type="text" name="gender" class="form-control" id="name"  value="{% if gender %}{{gender}}{% endif %}" placeholder="gender">
+        </div>
+   
+
+        <div class="form-group">
+          <input type="text" name="country_code" class="form-control" id="name"  value="{% if country_code %}{{country_code}}{% endif %}" placeholder="country_code">
+        </div>
+        <div class="form-group">
+          <input type="text" name="medal" class="form-control" id="name"  value="{% if medal %}{{medal}}{% endif %}" placeholder="medal">
+        </div>
+        <div class="form-group">
+          <input type="text" name="country" class="form-control" id="name"  value="{% if country %}{{country}}{% endif %}" placeholder="country">
+        </div>
+        <div class="form-group">
+          <input type="text" name="sport" class="form-control" id="name"  value="{% if sport %}{{sport}}{% endif %}" placeholder="sport" >
+        </div>
+        <div class="form-group">
+          <input type="text" name="discipline" class="form-control" id="name"  value="{% if discipline %}{{discipline}}{% endif %}" placeholder="discipline" >
+        </div>
+        <div class="form-group">
+          <input type="text" name="event" class="form-control" id="name"  value="{% if event %}{{event}}{% endif %}" placeholder="event" >
+        </div>
+                  <input type="text" name="search" class="form-control" id="name"  value="1" placeholder="event" style="display: none;">
+
+
+         <button type="submit" class="btn btn-primary" style="margin-top: 40px;width: 200px;height: 40px;">Search</button>
+       </form>
+     </div>
+   </div>
+
+   <div class="row" style="margin-top: 100px;">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10" style="text-align: center;">
+         <table class="table">
+            <thead>
+              <tr>
+                <th>City</th>
+                <th>Year</th>
+                <th>Sport</th>
+                <th>Discipline</th>
+                <th>Event</th>
+                <th>Athlete</th>
+                <th>Gender</th>
+                <th>Country_Code</th>
+                <th>Country</th>
+                <th>Event_gender</th>
+                <th>Medal</th>
+             
+              </tr>
+            </thead>
+            <tbody>
+               
+               {% for foo in result.object_list %}
+               <tr>
+                  <td>{{foo.city}}</td>
+                  <td>{{foo.year}}</td>
+                  <td>{{foo.gid.sport}}</td>
+                  <td>{{foo.gid.discipline}}</td>
+                  <td>{{foo.eid.event}}</td>
+                  <td>{{foo.athlete}}</td>
+                  <td>{{foo.gender}}</td>
+                  <td>{{foo.country_code}}</td>
+                  <td>{{foo.country}}</td>
+                  <td>{{foo.eid.gender}}</td>
+                  <td>{{foo.medal}}</td>
+                </tr>
+               {% endfor %}
+                  
+        
+          
+            </tbody>
+          </table>
+          <p>
+            {% if result.has_previous %}
+              <a href="?page={{ result.previous_page_number }}{%if city %}&city={{city}}{%endif%}{%if athlete %}&athlete={{athlete}}{%endif%}{%if gender %}&gender={{gender}}{%endif%}{%if country_code %}&country_code={{country_code}}{%endif%}{%if medal %}&medal={{medal}}{%endif%}{%if country %}&country={{country}}{%endif%}{%if sport %}&sport={{sport}}{%endif%}{%if discipline %}&discipline={{discipline}}{%endif%}{%if event %}&event={{event}}{%endif%}{%if year %}&year={{year}}{%endif%}{%if search %}&search={{search}}{%endif%}">Previous</a>
+              {% endif %}
+              {# result.paginator.number_pages 返回总页数 #}
+              Page {{ result.number }} of {{ result.paginator.num_pages }}.
+            {% if result.has_next %}
+              <a href="?page={{ result.next_page_number }}{%if city %}&city={{city}}{%endif%}{%if athlete %}&athlete={{athlete}}{%endif%}{%if gender %}&gender={{gender}}{%endif%}{%if country_code %}&country_code={{country_code}}{%endif%}{%if medal %}&medal={{medal}}{%endif%}{%if country %}&country={{country}}{%endif%}{%if sport %}&sport={{sport}}{%endif%}{%if discipline %}&discipline={{discipline}}{%endif%}{%if event %}&event={{event}}{%endif%}{%if year %}&year={{year}}{%endif%}{%if search %}&search={{search}}{%endif%}">Next</a>
+            {% endif %}
+            </p>
+      </div>
+      
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<div class="nav_menu">
+  <nav>
+          <ul class="nav navbar-nav navbar-left">
+              <li style="line-height: 80px;margin-left: 40px"><a href="/index"><h2>物业公示大厅</h2></a></li>
+          </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li class="">
+        <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <img src="{{ request.COOKIES.avther }}" alt=""> {{ request.COOKIES.username }}
+          <span class=" fa fa-angle-down"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-usermenu pull-right">
+                      <li><a href="/user/change/profile/"> 修改资料</a></li>
+
+          <li><a href="/user/change/password/"> 修改密码</a></li>
+          <li>
+            <a href="/user/change/sparce/">
+              <span>修改密保</span>
+            </a>
+          </li>
+          <li><a href="/user/logout/"><i class="fa fa-sign-out pull-right"></i>登出</a></li>
+        </ul>
+      </li>
+
+    </ul>
+  </nav>
+</div>
