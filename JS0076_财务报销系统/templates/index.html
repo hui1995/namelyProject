@@ -1,0 +1,23 @@
+{% extends "base_site.html" %}
+{% load staticfiles %}
+
+{% block title %} Tables {% endblock title %}
+
+{% block stylesheets %}
+    {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        
+        <img src="{% static 'images/bg.jpeg' %}" alt="" style="width: 100%;">
+    
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ block.super }}
+{% endblock javascripts %}
+
+
+
