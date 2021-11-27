@@ -7,17 +7,9 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required  # 验证用户是否登录
 
 
-# # 验证码相关
-# def captcha():
-#     hashkey = CaptchaStore.generate_key()  # 验证码答案
-#     image_url = captcha_image_url(hashkey)  # 验证码地址
-#     captcha = {'hashkey': hashkey, 'image_url': image_url}
-#     return captcha
 
 
-# # 刷新验证码
-# def refresh_captcha(request):
-#     return HttpResponse(json.dumps(captcha()), content_type='application/json')
+
 
 
 # def logoutAdmin(request):
@@ -49,51 +41,24 @@ from django.contrib.auth.decorators import login_required  # 验证用户是否�
 #             return HttpResponse("没有权限访问")
 
 
-# class LoginView(View):
-#     def get(self, request):
-#         hashkey = CaptchaStore.generate_key()  # 验证码答案
-#         image_url = captcha_image_url(hashkey)  # 验证码地址
-#         captcha = {'hashkey': hashkey, 'image_url': image_url}
-#         return render(request, 'login.html', locals())
+class LoginView(View):
+    def get(self, request):
+        return render(request, 'login.html', locals())
 
-#     def post(self, request):
-#         capt = request.POST.get("code", None)  # 用户提交的验证码
-#         key = request.POST.get("hashkey", None)  # 验证码答案
-#         username = request.POST.get("username", None)  # 验证码答案
-#         password = request.POST.get("password", None)  # 验证码答案
-#         hashkey = CaptchaStore.generate_key()  # 验证码答案
-#         image_url = captcha_image_url(hashkey)  # 验证码地址
-#         captcha = {'hashkey': hashkey, 'image_url': image_url}
+    def post(self, request):
+        username = request.POST.get("username", None)  # 验证码答案
+        password = request.POST.get("password", None)  # 验证码答案
+        user = authenticate(username=username, password=password)  # 类型为<class 'django.contrib.auth.models.User'>
+        if user:
+            login(request, user)  # 验
+            if user.type == 0:
+                return redirect("/stu/index/")
+            else:
+                return redirect("/tea/index/")
+        else:
+            msg = "账号或者密码不正确"
+        return render(request, "login.html", locals())
 
-#         if self.jarge_captcha(capt, key) == False:
-#             msg = "验证码输入错误"
-#             return render(request, 'login.html', locals())
-#         user = authenticate(username=username, password=password)  # 类型为<class 'django.contrib.auth.models.User'>
-
-#         if user:
-#             if user.a_status == 0:
-#                 msg = "账号被冻结"
-#                 return render(request, 'login.html', locals())
-#             login(request, user)  # 验证成功之后登录
-
-#             return redirect("/admin/index/")
-#         else:
-#             msg = "账号或者密码不正确"
-#         return render(request, "login.html", locals())
-
-#     def jarge_captcha(self, captchaStr, captchaHashkey):
-#         if captchaStr and captchaHashkey:
-#             try:
-#                 # 获取根据hashkey获取数据库中的response值
-#                 get_captcha = CaptchaStore.objects.get(hashkey=captchaHashkey)
-#                 if get_captcha.response == captchaStr.lower():  # 如果验证码匹配
-#                     return True
-#                 else:
-#                     return False
-#             except:
-#                 return False
-#         else:
-#             return False
 
 
 # @login_required

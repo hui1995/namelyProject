@@ -92,7 +92,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-# AUTH_USER_MODEL = 'myApp.Admin'
+AUTH_USER_MODEL = 'myApp.User'
 LOGIN_URL = "/login/"
 
 
