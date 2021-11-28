@@ -1,0 +1,175 @@
+{% extends "base_site.html" %}
+
+{% block title %} Tables {% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>课程信息管理 <small></small></h3>
+            </div>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+
+                        <div class="clearfix">
+                            <h3>小组管理</h3>
+                        </div>
+                    </div>
+
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-lg-6">
+
+                            </div>
+
+                            <div class="col-lg-6" style="margin-top: -15px">
+                                <form class="bs-example bs-example-form" role="form">
+                                    <div class="row">
+                                        <br>
+                                        <div class="col-lg-10">
+
+                                        </div><!-- /.col-lg-6 -->
+                                    </div><!-- /.row -->
+                                </form>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <a type="button" class="btn btn-primary" href="/group/add/?courseid={{id}}">创建小组</a>
+
+                            </div>
+
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>小组编号</th>
+
+                                    <th>主题名称</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for foo in grouplist %}
+                                <tr>
+                                    <td>{{ foo.number }}</td>
+
+                                    <td>{{ foo.theme.name }}</td>
+
+                                    <td>
+                                        <a type="button" class="btn btn-warning"
+                                            href="/group/stu/list/?id={{ foo.id }}&courseid={{id}}">管理小组</a>
+                                        <a type="button" class="btn btn-warning"
+                                            href="/group/del/?id={{ foo.id }}&courseid={{id}}">删除小组</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+
+                        <div class="clearfix">
+                            <h3>学生管理</h3>
+                        </div>
+                    </div>
+
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-lg-6">
+
+                            </div>
+
+                            <div class="col-lg-6" style="margin-top: -15px">
+                                <form class="bs-example bs-example-form" role="form">
+                                    <div class="row">
+                                        <br>
+                                        <div class="col-lg-10">
+
+                                        </div><!-- /.col-lg-6 -->
+                                    </div><!-- /.row -->
+                                </form>
+
+                            </div>
+                        </div>
+
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>学生名称</th>
+                                    <th>学生邮箱</th>
+                                    <th>级别</th>
+                                    <th>性别</th>
+                                    <th>个人简介</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                {% for foo in userlist %}
+                                <tr>
+                                    <td>{{ foo.user.username }}</td>
+                                    <td>{{ foo.user.email }}</td>
+                                    <td>{{ foo.user.grade }}</td>
+                                    <td>
+
+{% if foo.user.sex %}
+    男
+    {%else%}
+    女
+{% endif %}
+    
+
+                                    </td>
+                                    <td>{{ foo.user.summary }}</td>
+
+                                </tr>
+                                {% endfor %}
+
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+{{ block.super }}
+{% endblock javascripts %}

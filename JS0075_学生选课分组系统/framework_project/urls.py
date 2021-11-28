@@ -16,12 +16,36 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path,include
 from myApp import views
-# from myApp.views import LoginView
-
+from myApp.views import LoginView,TeaSignUpView,StuSignUpView,TeaIndexView,themeList,themeEdit,themeAdd,themeDel,CourseList,CourseDetailView,GroupAddView,GroupDelView,GroupStuListView
+from django.conf.urls import url
+from django.contrib import admin
 urlpatterns = [
+    url(r'^admin/', admin.site.urls),
 
-
-    # path("login/",LoginView.as_view()),
+    path("login/",LoginView.as_view()),
+    path("logout/",views.logoutAdmin),
+    path("tea/index/",TeaIndexView.as_view()),
+    path("tea/signup/",TeaSignUpView.as_view()),
+    path("stu/signup/",StuSignUpView.as_view()),
+    path("theme/list/",themeList),
+    path("theme/edit/",themeEdit),
+    path("theme/add/",themeAdd),
+    path("theme/del/",themeDel),
+    path("course/list/",CourseList),
+    path("course/detail/",CourseDetailView),
+    path("group/add/",GroupAddView),
+    path("group/del/",GroupDelView),
+    path("group/stu/list/",GroupStuListView),
+    path("group/stu/add/",views.GroupStuAddView),
+    path("group/stu/del/",views.GroupStuDelView),
+    path("group/stu/leader/",views.GroupStuLeaderView),
+    path("stu/course/list/",views.StuCourseListView),
+    path("my/stu/course/list/",views.MyStuCourseListView),
+    path("my/stu/group/list/",views.MyStuGroupListView),
+    path("stu/course/detail/list/",views.StuCourseDetailListView),
+    path("seleted/course/now/",views.selectedCourseNow),
+    path("",views.indexVIew),
+ 
     # path("logout/",views.logoutAdmin),
 #     path(r'captcha/', include('captcha.urls')),  # 这是生成验证码的图片
 #     path('refresh_captcha/', views.refresh_captcha),

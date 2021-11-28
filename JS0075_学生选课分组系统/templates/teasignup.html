@@ -19,7 +19,7 @@
             <div class="animate form login_form">
                 <section class="login_content">
                     <form style="margin-top: 100px" method="post">
-                        <h1>登陆</h1>
+                        <h1>教师注册</h1>
                         {% csrf_token %}
                         {% if msg %}
 <div class="alert alert-warning">{{ msg }}</div>
@@ -31,11 +31,32 @@
                         <div>
                             <input type="password" class="form-control" name="password" placeholder="密码" required=""/>
                         </div>
-                    
                         <div>
-                            <button class="btn btn-default submit" type="submit">登陆</button>
-                            <a class="reset_pass" href="/stu/signup/">学生注册</a>
-                            <a class="reset_pass" href="/tea/signup/">教师注册</a>
+                            <input type="password" class="form-control" name="password2" placeholder="确认密码" required=""/>
+                        </div>
+                
+                        <div>
+                        <select class="form-control" name="sex">
+                            <option value="1">男</option>
+                            <option value="0">女</option>
+                          </select>
+                             </div>
+                        <div style="margin-top: 20PX;">
+                            <input type="date" class="form-control" name="birtday" placeholder="生日" required=""/>
+                        </div>
+                        <!-- <div>
+                            <input type="date" class="form-control" name="birtday" placeholder="生日" required=""/>
+                        </div> -->
+                        <div style="margin-top: 20PX;">
+                            <input type="email" class="form-control" name="email" placeholder="邮箱" required=""/>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" name="summary" placeholder="教师简介" required=""/>
+                        </div>
+
+                        <div>
+                            <button class="btn btn-default submit" type="submit">注册</button>
+                            <a class="reset_pass" href="/login">登录</a>
 
                         </div>
 

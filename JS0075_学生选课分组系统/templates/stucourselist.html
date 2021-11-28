@@ -1,0 +1,95 @@
+{% extends "base_site.html" %}
+
+{% block title %} Tables {% endblock title %}
+
+{% block stylesheets %}
+    {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>选课中心 <small></small></h3>
+                </div>
+
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+
+                            <div class="clearfix"></div>
+                        </div>
+                
+                            <div class="x_content">
+                                <div class="row">
+                                    <div class="col-lg-6">
+
+                                    </div>
+
+                                    <div class="col-lg-6" style="margin-top: -15px">
+                                        <form class="bs-example bs-example-form" role="form">
+                                            <div class="row">
+                                                <br>
+                                                <div class="col-lg-10">
+                                               
+                                                </div><!-- /.col-lg-6 -->
+                                            </div><!-- /.row -->
+                                        </form>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                {% for foo in result %}
+                                <div class="col-sm-3">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <h1>{{foo.title}}</h1>
+                                            <div style="height: 60px;width: 100px;"></div>
+                                            <div class="row" style="width: 100%;font-size:20px">   
+                                                <div class="col-sm-6">
+                                                    <span>学时：{{foo.credit}}</span>
+                                                    <span>学分：{{foo.score}}</span>
+                                                </div>
+                                                <div class="col-sm-6" >
+                                                    
+                                                    {% if foo.selected %}
+                                                    <span style="float: right;">选择完毕</span>
+                                                    {% else %}
+                                                    <a class="btn btn-primary" style="float: right;" href="/stu/course/detail/list/?id={{foo.id}}">进入选课</a>
+
+                                                        
+                                                    {% endif %}
+                                                        
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    
+                                {% endfor %}
+                            </div>
+                              
+                            </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ block.super }}
+{% endblock javascripts %}
+
+
+
