@@ -1,4 +1,5 @@
 {% extends "base_site.html" %}
+{% load staticfiles %}
 
 {% block title %} 登陆 {% endblock title %}
 
@@ -11,14 +12,14 @@
 {% block body_class %}login{% endblock body_class %}
 
 {% block body %}
-<div>
+<div style="background-color: white;">
     <a class="hiddenanchor" id="signup"></a>
     <a class="hiddenanchor" id="signin"></a>
 
-    <div class="login_wrapper">
-        <div class="animate form login_form">
+    <div class="login_wrapper" style="background-color: white;">
+        <div class="animate form login_form" style="background-color: white;">
             <section class="login_content">
-                <p style="font-size: 46px;">财务报销系统</p>
+                <p style="font-size: 44px;"><img src="{% static 'images/logo.jpg' %}"  alt="" style="width: 70px;height: 70px;">  财务报销系统</p>
 
                 <form style="margin-top: 100px" method="post">
                     <h1>登陆</h1>
